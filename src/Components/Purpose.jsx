@@ -96,6 +96,8 @@ const Purpose = () => {
 const PurposeSection = styled.section`
   background-color: white;
   padding: 4rem 0;
+  overflow-x: hidden;
+  width: 100%;
 `
 
 const Container = styled.div`
@@ -157,11 +159,11 @@ const PurposeCard = styled.div`
   transform: ${props => {
     if (!props.isVisible) {
       switch(props.direction) {
-        case 'left': return 'translateX(-100px) rotate(-5deg)';
-        case 'right': return 'translateX(100px) rotate(5deg)';
-        case 'top': return 'translateY(-100px) scale(0.8)';
-        case 'bottom': return 'translateY(100px) scale(0.8)';
-        default: return 'translateY(50px)';
+        case 'left': return 'translateX(-50px) rotate(-2deg)';
+        case 'right': return 'translateX(50px) rotate(2deg)';
+        case 'top': return 'translateY(-50px) scale(0.9)';
+        case 'bottom': return 'translateY(50px) scale(0.9)';
+        default: return 'translateY(30px)';
       }
     }
     return 'translateX(0) translateY(0) rotate(0) scale(1)';

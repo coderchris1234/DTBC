@@ -72,6 +72,8 @@ const Service = () => {
 const ServiceSection = styled.section`
   background-color: #f5f5f5;
   padding: 4rem 0;
+  overflow-x: hidden;
+  width: 100%;
 `
 
 const Container = styled.div`
@@ -120,7 +122,7 @@ const ContentWrapper = styled.div`
 const ImageContainer = styled.div`
   width: 100%;
   opacity: ${props => props.isVisible ? '1' : '0'};
-  transform: translateX(${props => props.isVisible ? '0' : '-100px'}) rotate(${props => props.isVisible ? '0deg' : '-5deg'});
+  transform: translateX(${props => props.isVisible ? '0' : '-50px'}) rotate(${props => props.isVisible ? '0deg' : '-2deg'});
   transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
   transition-delay: ${props => props.animationDelay || '0s'};
 `
@@ -140,7 +142,7 @@ const ServiceImage = styled.img`
 const TextContent = styled.div`
   padding: 1rem 0;
   opacity: ${props => props.isVisible ? '1' : '0'};
-  transform: translateX(${props => props.isVisible ? '0' : '100px'}) rotate(${props => props.isVisible ? '0deg' : '5deg'});
+  transform: translateX(${props => props.isVisible ? '0' : '50px'}) rotate(${props => props.isVisible ? '0deg' : '2deg'});
   transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
   transition-delay: ${props => props.animationDelay || '0s'};
 `

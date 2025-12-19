@@ -4,7 +4,7 @@ const Hero = () => {
   return (
     <HeroSection>
       <HeroContent>
-        <HeroTitle>Experience THE HOPE</HeroTitle>
+        <HeroTitle>Experience THE DIVINE TOUCH</HeroTitle>
         <HeroSubtitle>A Life-Giving Church in DTBC</HeroSubtitle>
         <PlanVisitButton>PLAN A VISIT</PlanVisitButton>
       </HeroContent>
@@ -15,7 +15,7 @@ const Hero = () => {
 // Styled Components
 const HeroSection = styled.section`
   position: relative;
-  height: 100vh;
+  height: calc(100vh - 4rem); /* Subtract header height from viewport height */
   background-image: url('https://images.unsplash.com/photo-1507692049790-de58290a4334?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
   background-size: cover;
   background-position: center;
@@ -23,6 +23,7 @@ const HeroSection = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
   
   &::before {
     content: '';
@@ -41,7 +42,7 @@ const HeroContent = styled.div`
   z-index: 2;
   text-align: center;
   color: white;
-  max-width: 800px;
+  width: 100%;
   padding: 0 2rem;
 `
 

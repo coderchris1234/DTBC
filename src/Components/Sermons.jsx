@@ -93,6 +93,7 @@ const SermonsSection = styled.section`
   padding: 5rem 0;
   position: relative;
   overflow: hidden;
+  width: 100%;
 `
 
 const Container = styled.div`
@@ -121,7 +122,7 @@ const ContentWrapper = styled.div`
 
 const ImageSection = styled.div`
   opacity: ${props => props.isVisible ? '1' : '0'};
-  transform: translateX(${props => props.isVisible ? '0' : '-100px'}) rotate(${props => props.isVisible ? '0deg' : '-5deg'}) scale(${props => props.isVisible ? '1' : '0.9'});
+  transform: translateX(${props => props.isVisible ? '0' : '-50px'}) rotate(${props => props.isVisible ? '0deg' : '-2deg'}) scale(${props => props.isVisible ? '1' : '0.95'});
   transition: all 1s cubic-bezier(0.34, 1.56, 0.64, 1);
   transition-delay: ${props => props.animationDelay || '0s'};
 `
@@ -140,7 +141,7 @@ const SermonImage = styled.img`
 
 const TextSection = styled.div`
   opacity: ${props => props.isVisible ? '1' : '0'};
-  transform: translateX(${props => props.isVisible ? '0' : '100px'}) rotate(${props => props.isVisible ? '0deg' : '5deg'});
+  transform: translateX(${props => props.isVisible ? '0' : '50px'}) rotate(${props => props.isVisible ? '0deg' : '2deg'});
   transition: all 1s cubic-bezier(0.34, 1.56, 0.64, 1);
   transition-delay: ${props => props.animationDelay || '0s'};
 `
@@ -229,10 +230,10 @@ const ActionCard = styled.div`
   transform: ${props => {
     if (!props.isVisible) {
       switch(props.direction) {
-        case 'left': return 'translateY(100px) rotate(-10deg) scale(0.8)';
-        case 'right': return 'translateY(100px) rotate(10deg) scale(0.8)';
-        case 'center': return 'translateY(150px) scale(0.7)';
-        default: return 'translateY(100px) scale(0.8)';
+        case 'left': return 'translateY(50px) rotate(-3deg) scale(0.9)';
+        case 'right': return 'translateY(50px) rotate(3deg) scale(0.9)';
+        case 'center': return 'translateY(80px) scale(0.9)';
+        default: return 'translateY(50px) scale(0.9)';
       }
     }
     return 'translateY(0) rotate(0) scale(1)';

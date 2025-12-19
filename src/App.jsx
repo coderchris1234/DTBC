@@ -4,6 +4,7 @@ import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 import AboutPage from "./Pages/AboutPage";
 import GivePage from "./Pages/GivePage";
+import Visit from "./Pages/Visit";
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
       <Route path="/" element={<LandingPage />} />
       <Route path="about" element={<AboutPage />} />
       <Route path="give" element={<GivePage />} />
+      <Route path="visit" element={<Visit />} />
     </Routes>
     <Footer />
     </>
