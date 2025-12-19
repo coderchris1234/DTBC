@@ -1,8 +1,14 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 const HeroVisit = () => {
   const [isVisible, setIsVisible] = useState(false)
+  const navigate = useNavigate()
+
+  const handleConnectClick = () => {
+    navigate('/contact')
+  }
 
   useEffect(() => {
     // Trigger animation after component mounts
@@ -23,7 +29,7 @@ const HeroVisit = () => {
           <Description isVisible={isVisible} animationDelay="0.4s">
             Whether you're new to church, have been a Christian for many years, or are looking for a fresh start, you're welcome here.
           </Description>
-          <ConnectButton isVisible={isVisible} animationDelay="0.6s">
+          <ConnectButton isVisible={isVisible} animationDelay="0.6s" onClick={handleConnectClick}>
             CONNECT WITH US
           </ConnectButton>
         </Content>

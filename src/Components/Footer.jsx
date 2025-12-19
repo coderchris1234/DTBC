@@ -1,9 +1,15 @@
 import { useState, useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 const Footer = () => {
   const [isVisible, setIsVisible] = useState(false)
   const footerRef = useRef(null)
+  const navigate = useNavigate()
+
+  const handleConnectClick = () => {
+    navigate('/contact')
+  }
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -85,7 +91,7 @@ const Footer = () => {
                 </svg>
               </SocialIcon>
             </SocialIcons>
-            <ConnectButton>CONNECT WITH US</ConnectButton>
+            <ConnectButton onClick={handleConnectClick}>CONNECT WITH US</ConnectButton>
           </SocialSection>
         </FooterContent>
       </Container>

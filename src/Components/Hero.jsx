@@ -1,12 +1,19 @@
 import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom'
 
 const Hero = () => {
+  const navigate = useNavigate()
+
+  const handlePlanVisit = () => {
+    navigate('/visit')
+  }
+
   return (
     <HeroSection>
       <HeroContent>
         <HeroTitle>Experience THE DIVINE TOUCH</HeroTitle>
         <HeroSubtitle>A Life-Giving Church in DTBC</HeroSubtitle>
-        <PlanVisitButton>PLAN A VISIT</PlanVisitButton>
+        <PlanVisitButton onClick={handlePlanVisit}>PLAN A VISIT</PlanVisitButton>
       </HeroContent>
     </HeroSection>
   )

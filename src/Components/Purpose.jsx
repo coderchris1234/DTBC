@@ -37,7 +37,7 @@ const Purpose = () => {
         <CardsGrid>
           <PurposeCard isVisible={isVisible} animationDelay="0.1s" direction="left">
             <CardImage 
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+              src="https://plus.unsplash.com/premium_photo-1663127489224-47dfd0639f54?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8R29kfGVufDB8fDB8fHww"
               alt="Know God"
             />
             <CardOverlay>
