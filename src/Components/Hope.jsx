@@ -82,6 +82,7 @@ const HopeSection = styled.section`
   padding: 5rem 0;
   position: relative;
   overflow: hidden;
+  width: 100%;
   
   &::before {
     content: '';
@@ -152,10 +153,10 @@ const HopeCard = styled.div`
   transform: ${props => {
     if (!props.isVisible) {
       switch(props.direction) {
-        case 'left': return 'translateX(-150px) translateY(50px) rotate(-10deg) scale(0.8)';
-        case 'right': return 'translateX(150px) translateY(50px) rotate(10deg) scale(0.8)';
-        case 'center': return 'translateY(-100px) scale(0.7)';
-        default: return 'translateY(100px) scale(0.8)';
+        case 'left': return 'translateX(-50px) translateY(30px) rotate(-3deg) scale(0.9)';
+        case 'right': return 'translateX(50px) translateY(30px) rotate(3deg) scale(0.9)';
+        case 'center': return 'translateY(-50px) scale(0.9)';
+        default: return 'translateY(50px) scale(0.9)';
       }
     }
     return 'translateX(0) translateY(0) rotate(0) scale(1)';

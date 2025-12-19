@@ -7,13 +7,13 @@ import Sermons from '../Components/Sermons'
 
 const LandingPage = () => {
   return (
-    <div>
+    <>
         <Hero/>
         <Service />
         <Purpose />
         <Hope />
         <Sermons />
-    </div>
+    </>
   )
 }
 

@@ -121,22 +121,7 @@ const StyledNavLink = styled(NavLink)`
   }
 `
 
-const AboutButton = styled.button`
-  color: #374151;
-  padding: 0.5rem 1rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  background: none;
-  border: none;
-  cursor: pointer;
-  transition: color 0.2s ease-in-out;
 
-  &:hover {
-    color: #2563eb;
-  }
-`
 
 const MobileMenuButton = styled.button`
   display: block;
@@ -207,23 +192,7 @@ const MobileNavLink = styled(NavLink)`
   }
 `
 
-const MobileAboutButton = styled.button`
-  color: #374151;
-  display: block;
-  padding: 0.75rem 1rem;
-  font-size: 1rem;
-  font-weight: 500;
-  width: 100%;
-  text-align: left;
-  background: none;
-  border: none;
-  cursor: pointer;
-  transition: color 0.2s ease-in-out;
 
-  &:hover {
-    color: #2563eb;
-  }
-`
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -288,9 +257,12 @@ const Header = () => {
             >
               Visit
             </MobileNavLink>
-            <MobileAboutButton>
+            <MobileNavLink 
+              to="/about" 
+              onClick={() => setIsMenuOpen(false)}
+            >
               About
-            </MobileAboutButton>
+            </MobileNavLink>
             <MobileNavLink 
               to="/next-steps" 
               onClick={() => setIsMenuOpen(false)}

@@ -100,6 +100,7 @@ const FooterSection = styled.footer`
   padding: 3rem 0 2rem;
   position: relative;
   overflow: hidden;
+  width: 100%;
   
   &::before {
     content: '';
