@@ -3,7 +3,19 @@ import styled from 'styled-components'
 
 const HeroGive = () => {
   const [isVisible, setIsVisible] = useState(false)
+  const [currentWordIndex, setCurrentWordIndex] = useState(0)
   const sectionRef = useRef(null)
+  
+  const givingWords = [
+    'Generosity',
+    'Giving',
+    'Blessing',
+    'Stewardship',
+    'Offering',
+    'Tithing',
+    'Sharing',
+    'Abundance'
+  ]
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -27,13 +39,28 @@ const HeroGive = () => {
     }
   }, [])
 
+  // Word cycling effect
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentWordIndex((prevIndex) => 
+        (prevIndex + 1) % givingWords.length
+      )
+    }, 2500) // Change word every 2.5 seconds
+
+    return () => clearInterval(interval)
+  }, [givingWords.length])
+
   return (
     <GiveHeroSection ref={sectionRef}>
       <HeroOverlay />
       <HeroContent>
         <Container>
           <ContentWrapper isVisible={isVisible}>
-            <HeroTitle>Generosity</HeroTitle>
+            <HeroTitle>
+              <AnimatedWord key={currentWordIndex}>
+                {givingWords[currentWordIndex]}
+              </AnimatedWord>
+            </HeroTitle>
             <HeroDescription>
              We give because we are made in God’s image, and He is a giver. We are never more like God than when we give. 
             </HeroDescription>
@@ -120,6 +147,7 @@ const HeroTitle = styled.h1`
   margin-bottom: 1.5rem;
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
   line-height: 1.1;
+  min-height: 1.2em; /* Prevent layout shift during word changes */
   
   @media (max-width: 1024px) {
     font-size: 3rem;
@@ -132,6 +160,26 @@ const HeroTitle = styled.h1`
   
   @media (max-width: 480px) {
     font-size: 2rem;
+  }
+`
+
+const AnimatedWord = styled.span`
+  display: inline-block;
+  animation: fadeInUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(30px) scale(0.9);
+    }
+    50% {
+      opacity: 0.7;
+      transform: translateY(-5px) scale(1.05);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
   }
 `
 

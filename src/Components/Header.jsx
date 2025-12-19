@@ -6,6 +6,12 @@ import styled from 'styled-components'
 const HeaderSection = styled.section`
   background-color: white;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  width: 100%;
 `
 
 const Container = styled.div`

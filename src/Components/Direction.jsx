@@ -5,6 +5,21 @@ const Direction = () => {
   const [isVisible, setIsVisible] = useState(false)
   const sectionRef = useRef(null)
 
+  // Function to open Google Maps with church locations
+  const handleDirectionsClick = (location) => {
+    // Church addresses
+    const addresses = {
+      newJersey: "471 Clinton Avenue, Newark NJ 07108",
+      texas: "3520 FM 723 Rd, Rosenberg TX 77471"
+    }
+    
+    // Create Google Maps URL for the selected location
+    const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addresses[location])}`
+    
+    // Open in new tab
+    window.open(googleMapsUrl, '_blank')
+  }
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -60,11 +75,21 @@ const Direction = () => {
             
             <LocationSection isVisible={isVisible} animationDelay="0.5s">
               <SectionTitle>Locations</SectionTitle>
-              <Address>
-                <span style={{fontWeight: "bold"}}>New Jersey</span> 471 Clinton Avenue, <br /> Newark NJ 07108 <br />
-                <span style={{fontWeight: "bold"}}>Texas</span> 3520 FM 723 Rd, <br /> Rosenberg Tx 77471
-              </Address>
-              <DirectionsButton>DIRECTIONS</DirectionsButton>
+              <LocationItem>
+                <LocationName>New Jersey</LocationName>
+                <Address>471 Clinton Avenue, Newark NJ 07108</Address>
+                <DirectionsButton onClick={() => handleDirectionsClick('newJersey')}>
+                  GET DIRECTIONS
+                </DirectionsButton>
+              </LocationItem>
+              
+              <LocationItem>
+                <LocationName>Texas</LocationName>
+                <Address>3520 FM 723 Rd, Rosenberg TX 77471</Address>
+                <DirectionsButton onClick={() => handleDirectionsClick('texas')}>
+                  GET DIRECTIONS
+                </DirectionsButton>
+              </LocationItem>
             </LocationSection>
           </InfoSection>
           
@@ -173,11 +198,32 @@ const LocationSection = styled.div`
   transition-delay: ${props => props.animationDelay || '0s'};
 `
 
+const LocationItem = styled.div`
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+`
+
+const LocationName = styled.h3`
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+`
+
 const Address = styled.div`
   font-size: 1rem;
   color: #4b5563;
   line-height: 1.5;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 `
 
 const DirectionsButton = styled.button`
