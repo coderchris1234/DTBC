@@ -247,9 +247,6 @@ const Header = () => {
               <StyledNavLink to="/about">
                 About
               </StyledNavLink>
-              <StyledNavLink to="/next-steps">
-                Next Steps
-              </StyledNavLink>
               <StyledNavLink to="/give">
                 Give
               </StyledNavLink>
