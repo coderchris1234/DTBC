@@ -73,6 +73,13 @@ const LogoCircle = styled.div`
   justify-content: center;
 `
 
+const LogoImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 50%;
+`
+
 const LogoText = styled.span`
   color: white;
   font-weight: bold;
@@ -212,7 +219,16 @@ const Header = () => {
             <LogoLink to="/">
               <LogoWrapper>
                 <LogoCircle>
-                  <LogoText>DTBC</LogoText>
+                  <LogoImage 
+                    src="/dtbc.jpeg" 
+                    alt="DTBC Logo"
+                    onError={(e) => {
+                      // Fallback to text if image fails to load
+                      e.target.style.display = 'none'
+                      e.target.nextSibling.style.display = 'block'
+                    }}
+                  />
+                  <LogoText style={{ display: 'none' }}>DTBC</LogoText>
                 </LogoCircle>
                 <BrandContainer>
                   <BrandTitle>Divine Touch Bible </BrandTitle>

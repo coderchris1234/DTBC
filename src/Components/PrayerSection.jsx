@@ -1,9 +1,15 @@
 import { useState, useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 const PrayerSection = () => {
   const [isVisible, setIsVisible] = useState(false)
   const sectionRef = useRef(null)
+  const navigate = useNavigate()
+
+  const handleConnectClick = () => {
+    navigate('/contact')
+  }
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -59,7 +65,7 @@ const PrayerSection = () => {
               Trusting God, like any relationship, takes time and effort. We believe that through worship, Connect Groups, Hope Teams, and prayer you will learn how to trust God and gain the spiritual tools to put your faith into action.
             </Description>
             
-            <ConnectButton isVisible={isVisible} animationDelay="1.1s">
+            <ConnectButton isVisible={isVisible} animationDelay="1.1s" onClick={handleConnectClick}>
               CONNECT WITH US
             </ConnectButton>
           </TextSection>
