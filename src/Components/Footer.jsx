@@ -22,13 +22,14 @@ const Footer = () => {
       }
     )
 
-    if (footerRef.current) {
-      observer.observe(footerRef.current)
+    const currentRef = footerRef.current
+    if (currentRef) {
+      observer.observe(currentRef)
     }
 
     return () => {
-      if (footerRef.current) {
-        observer.unobserve(footerRef.current)
+      if (currentRef) {
+        observer.unobserve(currentRef)
       }
     }
   }, [])
@@ -40,7 +41,16 @@ const Footer = () => {
           <LogoSection isVisible={isVisible} animationDelay="0.2s">
             <LogoContainer>
               <LogoCircle>
-                <LogoText>DTBC</LogoText>
+                <LogoImage 
+                  src="/dtbc.jpeg" 
+                  alt="DTBC Logo"
+                  onError={(e) => {
+                    // Fallback to text if image fails to load
+                    e.target.style.display = 'none'
+                    e.target.nextSibling.style.display = 'block'
+                  }}
+                />
+                <LogoText style={{ display: 'none' }}>DTBC</LogoText>
               </LogoCircle>
               <BrandContainer>
                 <BrandTitle>DIVINE TOUCH BIBLE</BrandTitle>
@@ -176,6 +186,13 @@ const LogoCircle = styled.div`
   justify-content: center;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.3);
+`
+
+const LogoImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 50%;
 `
 
 const LogoText = styled.span`
