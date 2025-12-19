@@ -283,12 +283,6 @@ const Header = () => {
               About
             </MobileNavLink>
             <MobileNavLink 
-              to="/next-steps" 
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Next Steps
-            </MobileNavLink>
-            <MobileNavLink 
               to="/give" 
               onClick={() => setIsMenuOpen(false)}
             >
