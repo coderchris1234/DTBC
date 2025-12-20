@@ -7,24 +7,33 @@ const WhatToExpect = () => {
   const sectionRef = useRef(null)
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting)
-      },
-      {
-        threshold: 0.3,
-        rootMargin: '-50px 0px'
-      }
-    )
+    // Check if it's mobile view
+    const isMobile = window.innerWidth <= 768
+    
+    if (isMobile) {
+      // On mobile, make visible immediately
+      setIsVisible(true)
+    } else {
+      // On desktop, use intersection observer
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          setIsVisible(entry.isIntersecting)
+        },
+        {
+          threshold: 0.3,
+          rootMargin: '-50px 0px'
+        }
+      )
 
-    const currentRef = sectionRef.current
-    if (currentRef) {
-      observer.observe(currentRef)
-    }
-
-    return () => {
+      const currentRef = sectionRef.current
       if (currentRef) {
-        observer.unobserve(currentRef)
+        observer.observe(currentRef)
+      }
+
+      return () => {
+        if (currentRef) {
+          observer.unobserve(currentRef)
+        }
       }
     }
   }, [])
