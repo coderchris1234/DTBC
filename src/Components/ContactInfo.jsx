@@ -3,9 +3,12 @@ import styled from 'styled-components'
 import { theme } from '../styles/theme'
 import { MdEmail, MdPhone, MdLocationOn, MdChat } from 'react-icons/md'
 import { FaFacebookF, FaYoutube } from 'react-icons/fa'
+import { ContactCardSkeleton, PageSkeleton } from './SkeletonLoader'
+import { useComponentLoading } from '../hooks/usePageLoading'
 
 const ContactInfo = () => {
   const [isVisible, setIsVisible] = useState(false)
+  const isLoading = useComponentLoading([isVisible], 300)
   const sectionRef = useRef(null)
 
   useEffect(() => {
@@ -39,6 +42,47 @@ const ContactInfo = () => {
       }
     }
   }, [])
+
+  // Show skeleton loading
+  if (isLoading) {
+    return (
+      <Section ref={sectionRef}>
+        <Container>
+          <PageSkeleton>
+            <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+              <div style={{ 
+                height: '1rem', 
+                width: '100px', 
+                background: 'var(--bg-tertiary)', 
+                margin: '0 auto 1rem',
+                borderRadius: '4px'
+              }} />
+              <div style={{ 
+                height: '3rem', 
+                width: '250px', 
+                background: 'var(--bg-tertiary)', 
+                margin: '0 auto 1rem',
+                borderRadius: '4px'
+              }} />
+              <div style={{ 
+                height: '1.5rem', 
+                width: '450px', 
+                background: 'var(--bg-tertiary)', 
+                margin: '0 auto',
+                borderRadius: '4px'
+              }} />
+            </div>
+            <ContactGrid>
+              <ContactCardSkeleton />
+              <ContactCardSkeleton />
+              <ContactCardSkeleton />
+              <ContactCardSkeleton />
+            </ContactGrid>
+          </PageSkeleton>
+        </Container>
+      </Section>
+    )
+  }
 
   return (
     <Section ref={sectionRef}>

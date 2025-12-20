@@ -2,9 +2,12 @@ import { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import { theme } from '../styles/theme'
 import { FaPlay, FaYoutube, FaCalendarAlt, FaClock } from 'react-icons/fa'
+import { SermonCardSkeleton, PageSkeleton } from './SkeletonLoader'
+import { usePageLoading } from '../hooks/usePageLoading'
 
 const SermonsList = () => {
   const [isVisible, setIsVisible] = useState(true) // Start visible
+  const isLoading = usePageLoading(600) // Show skeleton for 600ms
   const sectionRef = useRef(null)
 
   useEffect(() => {
@@ -66,6 +69,46 @@ const SermonsList = () => {
 
   const handleSermonClick = (videoUrl) => {
     window.open(videoUrl, '_blank')
+  }
+
+  // Show skeleton loading
+  if (isLoading) {
+    return (
+      <Section ref={sectionRef}>
+        <Container>
+          <PageSkeleton>
+            <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+              <div style={{ 
+                height: '1rem', 
+                width: '150px', 
+                background: 'var(--bg-tertiary)', 
+                margin: '0 auto 1rem',
+                borderRadius: '4px'
+              }} />
+              <div style={{ 
+                height: '3rem', 
+                width: '300px', 
+                background: 'var(--bg-tertiary)', 
+                margin: '0 auto 1rem',
+                borderRadius: '4px'
+              }} />
+              <div style={{ 
+                height: '1.5rem', 
+                width: '500px', 
+                background: 'var(--bg-tertiary)', 
+                margin: '0 auto',
+                borderRadius: '4px'
+              }} />
+            </div>
+            <SermonsGrid>
+              <SermonCardSkeleton />
+              <SermonCardSkeleton />
+              <SermonCardSkeleton />
+            </SermonsGrid>
+          </PageSkeleton>
+        </Container>
+      </Section>
+    )
   }
 
   return (

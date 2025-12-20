@@ -12,17 +12,32 @@ export default defineConfig({
         manualChunks: {
           vendor: ['react', 'react-dom'],
           router: ['react-router-dom'],
-          styled: ['styled-components']
+          styled: ['styled-components'],
+          icons: ['react-icons/fa', 'react-icons/md', 'react-icons/wi', 'react-icons/bi', 'react-icons/bs']
         }
       }
     },
     // Optimize chunk size
-    chunkSizeWarningLimit: 1000
+    chunkSizeWarningLimit: 1000,
+    // Enable minification
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true
+      }
+    },
+    // Enable source maps for debugging
+    sourcemap: false
   },
   // Optimize dev server
   server: {
     hmr: {
       overlay: false
     }
+  },
+  // Performance optimizations
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react-router-dom', 'styled-components']
   }
 })

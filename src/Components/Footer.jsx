@@ -105,7 +105,7 @@ const Footer = () => {
         
         <FooterBottom>
           <Copyright>
-            © 2024 Divine Touch Bible Church. All rights reserved.
+            © {new Date().getFullYear()} Divine Touch Bible Church. All rights reserved.
           </Copyright>
         </FooterBottom>
       </Container>
