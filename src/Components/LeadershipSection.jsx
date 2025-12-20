@@ -52,10 +52,10 @@ const LeadershipSection = () => {
               />
             </LeaderImageContainer>
             <LeaderInfo>
-              <LeaderName>Pastor John Smith</LeaderName>
+              <LeaderName>Apostle Dr. Jospeh Ihimekpen</LeaderName>
               <LeaderTitle>Senior Pastor</LeaderTitle>
               <LeaderBio>
-                With over 20 years of ministry experience, Pastor John leads our congregation 
+                With over 20 years of ministry experience, Apostle Dr Joseph leads our congregation 
                 with passion for God's Word and deep care for each member of our church family.
               </LeaderBio>
             </LeaderInfo>
