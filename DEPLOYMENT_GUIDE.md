@@ -2,30 +2,47 @@
 
 ## Pre-Deployment Checklist
 
-### 1. Environment Configuration
+### 1. Dependencies and Build
+- [ ] Ensure all dependencies are installed: `npm install`
+- [ ] Verify Terser is installed for minification: `npm install --save-dev terser`
+- [ ] Test production build locally: `npm run build`
+- [ ] Test the production build: `npm run preview`
+
+### 2. Environment Configuration
 - [ ] Copy `.env.example` to `.env` and fill in your actual values
 - [ ] Update Google Analytics ID if using analytics
 - [ ] Configure EmailJS credentials for contact forms
 - [ ] Update church contact information
 
-### 2. Domain and SEO Setup
+### 3. Domain and SEO Setup
 - [ ] Update domain references in `public/sitemap.xml`
 - [ ] Update canonical URLs in `index.html`
 - [ ] Update Open Graph URLs for social media sharing
 - [ ] Verify robots.txt allows proper crawling
 
-### 3. Content Verification
+### 4. Content Verification
 - [ ] Review all church information for accuracy
 - [ ] Verify contact details (email, phone, address)
 - [ ] Check Zelle payment information
 - [ ] Update sermon videos with actual YouTube links
 - [ ] Verify leadership information and photos
 
-### 4. Performance Optimization
+### 5. Performance Optimization
 - [ ] Run `npm run build` to create production build
 - [ ] Test the production build locally with `npm run preview`
 - [ ] Verify all images are optimized
 - [ ] Check that lazy loading is working properly
+
+## Common Deployment Issues
+
+### Terser Error Fix
+If you encounter "terser not found" error during build:
+```bash
+npm install --save-dev terser
+```
+
+### CSS Import Warning Fix
+Ensure @import statements are at the top of CSS files, before any other rules.
 
 ## Deployment Options
 
