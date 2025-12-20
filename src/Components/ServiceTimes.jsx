@@ -4,9 +4,12 @@ import { theme } from '../styles/theme'
 import { WiDaySunny, WiMoonAltWaningCrescent4 } from 'react-icons/wi'
 import { MdAccessTime, MdFamilyRestroom } from 'react-icons/md'
 import { BiCoffee } from 'react-icons/bi'
+import { ServiceCardSkeleton, PageSkeleton } from './SkeletonLoader'
+import { useComponentLoading } from '../hooks/usePageLoading'
 
 const ServiceTimes = () => {
   const [isVisible, setIsVisible] = useState(false)
+  const isLoading = useComponentLoading([isVisible], 400)
   const sectionRef = useRef(null)
 
   useEffect(() => {
@@ -40,6 +43,46 @@ const ServiceTimes = () => {
       }
     }
   }, [])
+
+  // Show skeleton loading
+  if (isLoading) {
+    return (
+      <Section ref={sectionRef}>
+        <Container>
+          <PageSkeleton>
+            <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+              <div style={{ 
+                height: '1rem', 
+                width: '120px', 
+                background: 'var(--bg-tertiary)', 
+                margin: '0 auto 1rem',
+                borderRadius: '4px'
+              }} />
+              <div style={{ 
+                height: '3rem', 
+                width: '280px', 
+                background: 'var(--bg-tertiary)', 
+                margin: '0 auto 1rem',
+                borderRadius: '4px'
+              }} />
+              <div style={{ 
+                height: '1.5rem', 
+                width: '400px', 
+                background: 'var(--bg-tertiary)', 
+                margin: '0 auto',
+                borderRadius: '4px'
+              }} />
+            </div>
+            <ServicesGrid>
+              <ServiceCardSkeleton />
+              <ServiceCardSkeleton />
+              <ServiceCardSkeleton />
+            </ServicesGrid>
+          </PageSkeleton>
+        </Container>
+      </Section>
+    )
+  }
 
   return (
     <Section id="service-times" ref={sectionRef}>
