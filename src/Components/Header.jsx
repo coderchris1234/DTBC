@@ -39,6 +39,7 @@ const Header = () => {
             <NavContainer>
               <StyledNavLink to="/">Home</StyledNavLink>
               <StyledNavLink to="/about">About</StyledNavLink>
+              <StyledNavLink to="/sermons">Sermons</StyledNavLink>
               <StyledNavLink to="/visit">Visit</StyledNavLink>
               <StyledNavLink to="/give">Give</StyledNavLink>
               <StyledNavLink to="/contact">Connect</StyledNavLink>
@@ -60,6 +61,7 @@ const Header = () => {
           <MobileMenuContent isOpen={isMenuOpen}>
             <MobileNavLink to="/" onClick={() => setIsMenuOpen(false)}>Home</MobileNavLink>
             <MobileNavLink to="/about" onClick={() => setIsMenuOpen(false)}>About</MobileNavLink>
+            <MobileNavLink to="/sermons" onClick={() => setIsMenuOpen(false)}>Sermons</MobileNavLink>
             <MobileNavLink to="/visit" onClick={() => setIsMenuOpen(false)}>Visit</MobileNavLink>
             <MobileNavLink to="/give" onClick={() => setIsMenuOpen(false)}>Give</MobileNavLink>
             <MobileNavLink to="/contact" onClick={() => setIsMenuOpen(false)}>Connect</MobileNavLink>
