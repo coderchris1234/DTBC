@@ -1,6 +1,9 @@
 import { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import { theme } from '../styles/theme'
+import { WiDaySunny, WiMoonAltWaningCrescent4 } from 'react-icons/wi'
+import { MdAccessTime, MdFamilyRestroom } from 'react-icons/md'
+import { BiCoffee } from 'react-icons/bi'
 
 const ServiceTimes = () => {
   const [isVisible, setIsVisible] = useState(false)
@@ -45,7 +48,7 @@ const ServiceTimes = () => {
         
         <ServicesGrid>
           <ServiceCard isVisible={isVisible} delay="0.1s" featured>
-            <ServiceIcon>🌅</ServiceIcon>
+            <ServiceIcon><WiDaySunny size={48} /></ServiceIcon>
             <ServiceLocation>New Jersey</ServiceLocation>
             <ServiceTime>Sunday 9:45 AM</ServiceTime>
             <ServiceAddress>
@@ -56,7 +59,7 @@ const ServiceTimes = () => {
           </ServiceCard>
           
           <ServiceCard isVisible={isVisible} delay="0.2s" featured>
-            <ServiceIcon>🌅</ServiceIcon>
+            <ServiceIcon><WiDaySunny size={48} /></ServiceIcon>
             <ServiceLocation>Texas</ServiceLocation>
             <ServiceTime>Sunday 9:00 AM</ServiceTime>
             <ServiceAddress>
@@ -67,7 +70,7 @@ const ServiceTimes = () => {
           </ServiceCard>
           
           <ServiceCard isVisible={isVisible} delay="0.3s">
-            <ServiceIcon>🌙</ServiceIcon>
+            <ServiceIcon><WiMoonAltWaningCrescent4 size={48} /></ServiceIcon>
             <ServiceLocation>Both Locations</ServiceLocation>
             <ServiceTime>Wednesday 6:00 PM</ServiceTime>
             <ServiceAddress>
@@ -80,7 +83,7 @@ const ServiceTimes = () => {
         
         <AdditionalInfo isVisible={isVisible} delay="0.4s">
           <InfoCard>
-            <InfoIcon>⏰</InfoIcon>
+            <InfoIcon><MdAccessTime size={24} /></InfoIcon>
             <InfoContent>
               <InfoTitle>Arrive Early</InfoTitle>
               <InfoText>We recommend arriving 15 minutes before service to find parking and get settled.</InfoText>
@@ -88,7 +91,7 @@ const ServiceTimes = () => {
           </InfoCard>
           
           <InfoCard>
-            <InfoIcon>👨‍👩‍👧‍👦</InfoIcon>
+            <InfoIcon><MdFamilyRestroom size={24} /></InfoIcon>
             <InfoContent>
               <InfoTitle>Children's Ministry</InfoTitle>
               <InfoText>Age-appropriate programs available for children during all Sunday services.</InfoText>
@@ -96,7 +99,7 @@ const ServiceTimes = () => {
           </InfoCard>
           
           <InfoCard>
-            <InfoIcon>☕</InfoIcon>
+            <InfoIcon><BiCoffee size={24} /></InfoIcon>
             <InfoContent>
               <InfoTitle>Fellowship Time</InfoTitle>
               <InfoText>Join us for coffee and conversation after each Sunday service.</InfoText>
@@ -111,7 +114,8 @@ const ServiceTimes = () => {
 // Styled Components
 const Section = styled.section`
   padding: ${theme.spacing['5xl']} 0;
-  background: ${theme.colors.white};
+  background: var(--bg-primary);
+  transition: var(--transition-theme);
   
   @media (max-width: 768px) {
     padding: ${theme.spacing['3xl']} 0;
@@ -141,7 +145,7 @@ const SectionLabel = styled.span`
   font-family: ${theme.typography.fonts.secondary};
   font-size: ${theme.typography.sizes.sm};
   font-weight: ${theme.typography.weights.medium};
-  color: ${theme.colors.primary[600]};
+  color: var(--color-primary-600);
   text-transform: uppercase;
   letter-spacing: 2px;
   margin-bottom: ${theme.spacing.md};
@@ -152,7 +156,7 @@ const MainHeading = styled.h2`
   font-family: ${theme.typography.fonts.accent};
   font-size: ${theme.typography.sizes['4xl']};
   font-weight: ${theme.typography.weights.light};
-  color: ${theme.colors.text.primary};
+  color: var(--text-primary);
   line-height: ${theme.typography.lineHeights.tight};
   margin-bottom: ${theme.spacing.lg};
   
@@ -164,19 +168,23 @@ const MainHeading = styled.h2`
 const Description = styled.p`
   font-family: ${theme.typography.fonts.primary};
   font-size: ${theme.typography.sizes.lg};
-  color: ${theme.colors.text.secondary};
+  color: var(--text-secondary);
   line-height: ${theme.typography.lineHeights.relaxed};
 `
 
 const ServicesGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: ${theme.spacing.xl};
   margin-bottom: ${theme.spacing['3xl']};
   
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
     gap: ${theme.spacing.lg};
+  }
+  
+  @media (max-width: 480px) {
+    gap: ${theme.spacing.md};
   }
 `
 
@@ -249,6 +257,11 @@ const AdditionalInfo = styled.div`
   transform: translateY(${props => props.isVisible ? '0' : '30px'});
   transition: all 0.8s ease-out;
   transition-delay: ${props => props.delay || '0s'};
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: ${theme.spacing.md};
+  }
 `
 
 const InfoCard = styled.div`

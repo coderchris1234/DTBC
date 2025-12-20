@@ -344,7 +344,8 @@ const SuccessButton = styled.button`
 
 const Section = styled.section`
   padding: ${theme.spacing['3xl']} 0;
-  background: ${theme.colors.neutral[50]};
+  background: var(--bg-secondary);
+  transition: var(--transition-theme);
   
   @media (max-width: 768px) {
     padding: ${theme.spacing['2xl']} 0;
@@ -367,7 +368,7 @@ const ContentGrid = styled.div`
   gap: ${theme.spacing['4xl']};
   align-items: flex-start;
   
-  @media (max-width: 768px) {
+  @media (max-width: 968px) {
     grid-template-columns: 1fr;
     gap: ${theme.spacing['2xl']};
   }
@@ -383,7 +384,7 @@ const SectionLabel = styled.span`
   font-family: ${theme.typography.fonts.secondary};
   font-size: ${theme.typography.sizes.sm};
   font-weight: ${theme.typography.weights.medium};
-  color: ${theme.colors.primary[600]};
+  color: var(--color-primary-600);
   text-transform: uppercase;
   letter-spacing: 2px;
   margin-bottom: ${theme.spacing.md};
@@ -394,7 +395,7 @@ const MainHeading = styled.h2`
   font-family: ${theme.typography.fonts.accent};
   font-size: ${theme.typography.sizes['4xl']};
   font-weight: ${theme.typography.weights.light};
-  color: ${theme.colors.text.primary};
+  color: var(--text-primary);
   line-height: ${theme.typography.lineHeights.tight};
   margin-bottom: ${theme.spacing.lg};
   
@@ -406,7 +407,7 @@ const MainHeading = styled.h2`
 const Description = styled.p`
   font-family: ${theme.typography.fonts.primary};
   font-size: ${theme.typography.sizes.lg};
-  color: ${theme.colors.text.secondary};
+  color: var(--text-secondary);
   line-height: ${theme.typography.lineHeights.relaxed};
   margin-bottom: ${theme.spacing['2xl']};
 `
@@ -422,8 +423,9 @@ const FormRow = styled.div`
   grid-template-columns: 1fr 1fr;
   gap: ${theme.spacing.lg};
   
-  @media (max-width: 480px) {
+  @media (max-width: 640px) {
     grid-template-columns: 1fr;
+    gap: ${theme.spacing.md};
   }
 `
 
@@ -437,27 +439,27 @@ const Label = styled.label`
   font-family: ${theme.typography.fonts.secondary};
   font-size: ${theme.typography.sizes.base};
   font-weight: ${theme.typography.weights.medium};
-  color: ${theme.colors.text.primary};
+  color: var(--text-primary);
 `
 
 const Input = styled.input`
   font-family: ${theme.typography.fonts.primary};
   font-size: ${theme.typography.sizes.base};
   padding: ${theme.spacing.md};
-  border: 1px solid ${theme.colors.neutral[300]};
+  border: 1px solid var(--border-color);
   border-radius: ${theme.borderRadius.lg};
-  background: ${theme.colors.white};
-  color: ${theme.colors.text.primary};
-  transition: all 0.3s ease;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  transition: var(--transition-theme);
   
   &:focus {
     outline: none;
-    border-color: ${theme.colors.primary[400]};
-    box-shadow: 0 0 0 3px ${theme.colors.primary[100]};
+    border-color: var(--color-primary-400);
+    box-shadow: 0 0 0 3px var(--color-primary-100);
   }
   
   &::placeholder {
-    color: ${theme.colors.text.muted};
+    color: var(--text-muted);
   }
 `
 
@@ -465,16 +467,16 @@ const Select = styled.select`
   font-family: ${theme.typography.fonts.primary};
   font-size: ${theme.typography.sizes.base};
   padding: ${theme.spacing.md};
-  border: 1px solid ${theme.colors.neutral[300]};
+  border: 1px solid var(--border-color);
   border-radius: ${theme.borderRadius.lg};
-  background: ${theme.colors.white};
-  color: ${theme.colors.text.primary};
-  transition: all 0.3s ease;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  transition: var(--transition-theme);
   
   &:focus {
     outline: none;
-    border-color: ${theme.colors.primary[400]};
-    box-shadow: 0 0 0 3px ${theme.colors.primary[100]};
+    border-color: var(--color-primary-400);
+    box-shadow: 0 0 0 3px var(--color-primary-100);
   }
 `
 
@@ -482,22 +484,22 @@ const TextArea = styled.textarea`
   font-family: ${theme.typography.fonts.primary};
   font-size: ${theme.typography.sizes.base};
   padding: ${theme.spacing.md};
-  border: 1px solid ${theme.colors.neutral[300]};
+  border: 1px solid var(--border-color);
   border-radius: ${theme.borderRadius.lg};
-  background: ${theme.colors.white};
-  color: ${theme.colors.text.primary};
+  background: var(--bg-primary);
+  color: var(--text-primary);
   resize: vertical;
   min-height: 120px;
-  transition: all 0.3s ease;
+  transition: var(--transition-theme);
   
   &:focus {
     outline: none;
-    border-color: ${theme.colors.primary[400]};
-    box-shadow: 0 0 0 3px ${theme.colors.primary[100]};
+    border-color: var(--color-primary-400);
+    box-shadow: 0 0 0 3px var(--color-primary-100);
   }
   
   &::placeholder {
-    color: ${theme.colors.text.muted};
+    color: var(--text-muted);
   }
 `
 
@@ -505,26 +507,26 @@ const SubmitButton = styled.button`
   font-family: ${theme.typography.fonts.secondary};
   font-size: ${theme.typography.sizes.base};
   font-weight: ${theme.typography.weights.medium};
-  color: ${theme.colors.white};
-  background: ${theme.colors.primary[600]};
+  color: var(--text-inverse);
+  background: var(--color-primary-600);
   border: none;
   padding: ${theme.spacing.md} ${theme.spacing.xl};
   border-radius: ${theme.borderRadius.lg};
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: var(--transition-theme);
   align-self: flex-start;
   
   &:hover:not(:disabled) {
-    background: ${theme.colors.primary[700]};
+    background: var(--color-primary-700);
     transform: translateY(-2px);
   }
   
   &:disabled {
-    background: ${theme.colors.neutral[400]};
+    background: var(--color-neutral-400);
     cursor: not-allowed;
   }
   
-  @media (max-width: 480px) {
+  @media (max-width: 640px) {
     width: 100%;
   }
 `

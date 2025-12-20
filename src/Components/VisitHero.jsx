@@ -8,7 +8,11 @@ const VisitHero = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    setIsVisible(true)
+    const timer = setTimeout(() => {
+      setIsVisible(true)
+    }, 100)
+    
+    return () => clearTimeout(timer)
   }, [])
 
   return (
@@ -45,15 +49,16 @@ const HeroSection = styled.section`
   min-height: 500px;
   background: linear-gradient(
     135deg,
-    ${theme.colors.primary[100]} 0%,
-    ${theme.colors.secondary[100]} 50%,
-    ${theme.colors.accent.cream} 100%
+    var(--color-primary-100) 0%,
+    var(--color-secondary-100) 50%,
+    var(--color-accent-cream) 100%
   );
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   margin-top: 80px;
+  transition: var(--transition-theme);
   
   @media (max-width: 768px) {
     height: 60vh;
@@ -68,7 +73,7 @@ const HeroOverlay = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="0.5" fill="%23${theme.colors.neutral[300].slice(1)}" opacity="0.1"/><circle cx="75" cy="75" r="0.3" fill="%23${theme.colors.primary[300].slice(1)}" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="0.5" fill="%23d1d1cc" opacity="0.1"/><circle cx="75" cy="75" r="0.3" fill="%23d9ccb8" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
   opacity: 0.3;
   z-index: 1;
 `
@@ -97,7 +102,7 @@ const HeroContent = styled.div`
 const Breadcrumb = styled.nav`
   font-family: ${theme.typography.fonts.secondary};
   font-size: ${theme.typography.sizes.sm};
-  color: ${theme.colors.text.muted};
+  color: var(--text-muted);
   margin-bottom: ${theme.spacing.md};
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -107,7 +112,7 @@ const HeroTitle = styled.h1`
   font-family: ${theme.typography.fonts.accent};
   font-size: ${theme.typography.sizes['6xl']};
   font-weight: ${theme.typography.weights.light};
-  color: ${theme.colors.text.primary};
+  color: var(--text-primary);
   margin-bottom: ${theme.spacing.lg};
   line-height: ${theme.typography.lineHeights.tight};
   
@@ -124,7 +129,7 @@ const HeroSubtitle = styled.p`
   font-family: ${theme.typography.fonts.primary};
   font-size: ${theme.typography.sizes.xl};
   font-weight: ${theme.typography.weights.normal};
-  color: ${theme.colors.text.secondary};
+  color: var(--text-secondary);
   line-height: ${theme.typography.lineHeights.relaxed};
   max-width: 600px;
   margin: 0 auto ${theme.spacing['2xl']};
@@ -154,17 +159,17 @@ const PrimaryButton = styled.button`
   font-family: ${theme.typography.fonts.secondary};
   font-size: ${theme.typography.sizes.base};
   font-weight: ${theme.typography.weights.medium};
-  color: ${theme.colors.white};
-  background: ${theme.colors.primary[600]};
+  color: var(--text-inverse);
+  background: var(--color-primary-600);
   border: none;
   padding: ${theme.spacing.md} ${theme.spacing.xl};
   border-radius: ${theme.borderRadius.lg};
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: var(--transition-theme);
   box-shadow: ${theme.shadows.soft};
   
   &:hover {
-    background: ${theme.colors.primary[700]};
+    background: var(--color-primary-700);
     transform: translateY(-2px);
     box-shadow: ${theme.shadows.medium};
   }
@@ -183,17 +188,17 @@ const SecondaryButton = styled.button`
   font-family: ${theme.typography.fonts.secondary};
   font-size: ${theme.typography.sizes.base};
   font-weight: ${theme.typography.weights.medium};
-  color: ${theme.colors.primary[600]};
+  color: var(--color-primary-600);
   background: transparent;
-  border: 2px solid ${theme.colors.primary[300]};
+  border: 2px solid var(--color-primary-300);
   padding: ${theme.spacing.md} ${theme.spacing.xl};
   border-radius: ${theme.borderRadius.lg};
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: var(--transition-theme);
   
   &:hover {
-    background: ${theme.colors.primary[50]};
-    border-color: ${theme.colors.primary[400]};
+    background: var(--color-primary-50);
+    border-color: var(--color-primary-400);
     transform: translateY(-2px);
   }
   

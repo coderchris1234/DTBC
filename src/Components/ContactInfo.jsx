@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import { theme } from '../styles/theme'
+import { MdEmail, MdPhone, MdLocationOn, MdChat } from 'react-icons/md'
+import { FaFacebookF, FaYoutube } from 'react-icons/fa'
 
 const ContactInfo = () => {
   const [isVisible, setIsVisible] = useState(false)
@@ -45,7 +47,7 @@ const ContactInfo = () => {
         
         <ContactGrid>
           <ContactCard isVisible={isVisible} delay="0.1s">
-            <CardIcon>📧</CardIcon>
+            <CardIcon><MdEmail size={48} /></CardIcon>
             <CardTitle>Email Us</CardTitle>
             <CardDescription>
               Send us a message and we'll get back to you within 24 hours.
@@ -63,7 +65,7 @@ const ContactInfo = () => {
           </ContactCard>
           
           <ContactCard isVisible={isVisible} delay="0.2s">
-            <CardIcon>📞</CardIcon>
+            <CardIcon><MdPhone size={48} /></CardIcon>
             <CardTitle>Call Us</CardTitle>
             <CardDescription>
               Speak with someone from our team during office hours.
@@ -85,7 +87,7 @@ const ContactInfo = () => {
           </ContactCard>
           
           <ContactCard isVisible={isVisible} delay="0.3s">
-            <CardIcon>📍</CardIcon>
+            <CardIcon><MdLocationOn size={48} /></CardIcon>
             <CardTitle>Visit Us</CardTitle>
             <CardDescription>
               Come see us in person at either of our two locations.
@@ -109,18 +111,18 @@ const ContactInfo = () => {
           </ContactCard>
           
           <ContactCard isVisible={isVisible} delay="0.4s">
-            <CardIcon>💬</CardIcon>
+            <CardIcon><MdChat size={48} /></CardIcon>
             <CardTitle>Connect Online</CardTitle>
             <CardDescription>
               Follow us on social media for updates and community connection.
             </CardDescription>
             <SocialLinks>
               <SocialLink href="https://www.facebook.com/DivineTouchChurch" target="_blank" rel="noopener noreferrer">
-                <SocialIcon>📘</SocialIcon>
+                <SocialIcon><FaFacebookF size={20} /></SocialIcon>
                 <SocialText>Facebook</SocialText>
               </SocialLink>
               <SocialLink href="https://www.youtube.com/@divinetouchbiblechurchnewj9570" target="_blank" rel="noopener noreferrer">
-                <SocialIcon>📺</SocialIcon>
+                <SocialIcon><FaYoutube size={20} /></SocialIcon>
                 <SocialText>YouTube</SocialText>
               </SocialLink>
             </SocialLinks>

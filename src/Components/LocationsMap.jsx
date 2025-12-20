@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import { theme } from '../styles/theme'
+import { MdLocationOn, MdPhone, MdEmail, MdAccessTime, MdMap, MdChat } from 'react-icons/md'
 
 const LocationsMap = () => {
   const [isVisible, setIsVisible] = useState(false)
@@ -86,19 +87,19 @@ const LocationsMap = () => {
             <LocationName>{locations[activeLocation].name}</LocationName>
             <LocationDetails>
               <DetailItem>
-                <DetailIcon>📍</DetailIcon>
+                <DetailIcon><MdLocationOn size={20} /></DetailIcon>
                 <DetailText>{locations[activeLocation].address}</DetailText>
               </DetailItem>
               <DetailItem>
-                <DetailIcon>📞</DetailIcon>
+                <DetailIcon><MdPhone size={20} /></DetailIcon>
                 <DetailText>{locations[activeLocation].phone}</DetailText>
               </DetailItem>
               <DetailItem>
-                <DetailIcon>✉️</DetailIcon>
+                <DetailIcon><MdEmail size={20} /></DetailIcon>
                 <DetailText>{locations[activeLocation].email}</DetailText>
               </DetailItem>
               <DetailItem>
-                <DetailIcon>⏰</DetailIcon>
+                <DetailIcon><MdAccessTime size={20} /></DetailIcon>
                 <DetailText>
                   {locations[activeLocation].services.join(' • ')}
                 </DetailText>
@@ -114,7 +115,7 @@ const LocationsMap = () => {
           
           <MapContainer>
             <MapPlaceholder>
-              <MapIcon>🗺️</MapIcon>
+              <MapIcon><MdMap size={48} /></MapIcon>
               <MapText>Interactive Map</MapText>
               <MapSubtext>Click "Get Directions" for navigation</MapSubtext>
             </MapPlaceholder>
@@ -122,7 +123,7 @@ const LocationsMap = () => {
         </LocationContent>
         
         <ContactPrompt isVisible={isVisible} delay="0.5s">
-          <PromptIcon>💬</PromptIcon>
+          <PromptIcon><MdChat size={32} /></PromptIcon>
           <PromptContent>
             <PromptTitle>Need Help Finding Us?</PromptTitle>
             <PromptText>
@@ -138,7 +139,8 @@ const LocationsMap = () => {
 // Styled Components
 const Section = styled.section`
   padding: ${theme.spacing['5xl']} 0;
-  background: ${theme.colors.white};
+  background: var(--bg-primary);
+  transition: var(--transition-theme);
   
   @media (max-width: 768px) {
     padding: ${theme.spacing['3xl']} 0;
@@ -168,7 +170,7 @@ const SectionLabel = styled.span`
   font-family: ${theme.typography.fonts.secondary};
   font-size: ${theme.typography.sizes.sm};
   font-weight: ${theme.typography.weights.medium};
-  color: ${theme.colors.primary[600]};
+  color: var(--color-primary-600);
   text-transform: uppercase;
   letter-spacing: 2px;
   margin-bottom: ${theme.spacing.md};
@@ -179,7 +181,7 @@ const MainHeading = styled.h2`
   font-family: ${theme.typography.fonts.accent};
   font-size: ${theme.typography.sizes['4xl']};
   font-weight: ${theme.typography.weights.light};
-  color: ${theme.colors.text.primary};
+  color: var(--text-primary);
   line-height: ${theme.typography.lineHeights.tight};
   margin-bottom: ${theme.spacing.lg};
   
@@ -191,7 +193,7 @@ const MainHeading = styled.h2`
 const Description = styled.p`
   font-family: ${theme.typography.fonts.primary};
   font-size: ${theme.typography.sizes.lg};
-  color: ${theme.colors.text.secondary};
+  color: var(--text-secondary);
   line-height: ${theme.typography.lineHeights.relaxed};
 `
 

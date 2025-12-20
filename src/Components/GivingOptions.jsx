@@ -1,10 +1,13 @@
 import { useState, useEffect, useRef } from 'react'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import { theme } from '../styles/theme'
+import { MdPhoneAndroid, MdAttachMoney, MdEmail, MdAccessTime, MdInventory, MdPayment, MdAssignment, MdSecurity, MdClose, MdContentCopy, MdCheck } from 'react-icons/md'
 
 const GivingOptions = () => {
   const [isVisible, setIsVisible] = useState(false)
   const [showInPersonInfo, setShowInPersonInfo] = useState(false)
+  const [showAddressModal, setShowAddressModal] = useState(false)
+  const [emailCopied, setEmailCopied] = useState(false)
   const sectionRef = useRef(null)
 
   useEffect(() => {
@@ -47,20 +50,85 @@ const GivingOptions = () => {
     // Try to open email client
     window.location.href = mailtoLink
     
-    // Show a backup message after a short delay
+    // Reset copied state and show the modal
+    setEmailCopied(false)
+    setShowAddressModal(true)
+    
+    // Auto-hide modal after 8 seconds
     setTimeout(() => {
-      if (confirm('If your email client did not open, would you like to copy the email address to your clipboard?')) {
-        navigator.clipboard.writeText('parakletos319@yahoo.com').then(() => {
-          alert('Email address copied: parakletos319@yahoo.com\n\nPlease send an email requesting the mailing address.')
-        }).catch(() => {
-          alert('Email: parakletos319@yahoo.com\n\nPlease send an email requesting the mailing address for check donations.')
-        })
-      }
-    }, 1000)
+      setShowAddressModal(false)
+    }, 8000)
+  }
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText('parakletos319@yahoo.com').then(() => {
+      setEmailCopied(true)
+      // Reset the copied state after 3 seconds
+      setTimeout(() => {
+        setEmailCopied(false)
+      }, 3000)
+    }).catch(() => {
+      // Fallback for older browsers
+      const textArea = document.createElement('textarea')
+      textArea.value = 'parakletos319@yahoo.com'
+      document.body.appendChild(textArea)
+      textArea.select()
+      document.execCommand('copy')
+      document.body.removeChild(textArea)
+      setEmailCopied(true)
+      // Reset the copied state after 3 seconds
+      setTimeout(() => {
+        setEmailCopied(false)
+      }, 3000)
+    })
+  }
+
+  const closeAddressModal = () => {
+    setShowAddressModal(false)
+    setEmailCopied(false) // Reset copied state when modal closes
   }
 
   return (
-    <Section ref={sectionRef}>
+    <>
+      {/* Address Request Modal */}
+      {showAddressModal && (
+        <AddressModal>
+          <ModalContent>
+            <ModalHeader>
+              <ModalTitle>Mailing Address Request</ModalTitle>
+              <CloseButton onClick={closeAddressModal}>
+                <MdClose size={20} />
+              </CloseButton>
+            </ModalHeader>
+            <ModalBody>
+              <ModalText>
+                We've opened your email client to send a request for our mailing address.
+              </ModalText>
+              <ModalText>
+                If your email didn't open, please copy our email address below and send us a message:
+              </ModalText>
+              <EmailCopySection>
+                <EmailAddress>parakletos319@yahoo.com</EmailAddress>
+                <CopyButton onClick={handleCopyEmail} copied={emailCopied}>
+                  {emailCopied ? (
+                    <>
+                      <MdCheck size={16} />
+                      Copied!
+                    </>
+                  ) : (
+                    <>
+                      <MdContentCopy size={16} />
+                      Copy Email
+                    </>
+                  )}
+                </CopyButton>
+              </EmailCopySection>
+            </ModalBody>
+          </ModalContent>
+        </AddressModal>
+      )}
+      
+      <Section ref={sectionRef}>
       <Container>
         <HeaderContent isVisible={isVisible}>
           <SectionLabel>Ways to Give</SectionLabel>
@@ -75,7 +143,7 @@ const GivingOptions = () => {
         
         <GivingGrid>
           <GivingCard isVisible={isVisible} delay="0.1s" featured>
-            <CardIcon>📱</CardIcon>
+            <CardIcon><MdPhoneAndroid size={48} /></CardIcon>
             <CardTitle>Zelle Transfer</CardTitle>
             <CardDescription>
               Send your tithe and offerings quickly and securely using Zelle. 
@@ -96,7 +164,7 @@ const GivingOptions = () => {
           </GivingCard>
           
           <GivingCard isVisible={isVisible} delay="0.2s">
-            <CardIcon>💰</CardIcon>
+            <CardIcon><MdAttachMoney size={48} /></CardIcon>
             <CardTitle>In-Person Giving</CardTitle>
             <CardDescription>
               Bring your tithe and offerings during our worship services. 
@@ -113,7 +181,7 @@ const GivingOptions = () => {
           </GivingCard>
           
           <GivingCard isVisible={isVisible} delay="0.3s">
-            <CardIcon>✉️</CardIcon>
+            <CardIcon><MdEmail size={48} /></CardIcon>
             <CardTitle>Mail Your Check</CardTitle>
             <CardDescription>
               Send your check by mail to our church office. 
@@ -139,7 +207,7 @@ const GivingOptions = () => {
             <InPersonTitle>In-Person Offering Guidelines</InPersonTitle>
             <InPersonContent>
               <InPersonItem>
-                <InPersonIcon>🕐</InPersonIcon>
+                <InPersonIcon><MdAccessTime size={24} /></InPersonIcon>
                 <InPersonText>
                   <InPersonLabel>When to Give</InPersonLabel>
                   <InPersonDescription>
@@ -150,7 +218,7 @@ const GivingOptions = () => {
               </InPersonItem>
               
               <InPersonItem>
-                <InPersonIcon>📦</InPersonIcon>
+                <InPersonIcon><MdInventory size={24} /></InPersonIcon>
                 <InPersonText>
                   <InPersonLabel>Offering Boxes</InPersonLabel>
                   <InPersonDescription>
@@ -161,7 +229,7 @@ const GivingOptions = () => {
               </InPersonItem>
               
               <InPersonItem>
-                <InPersonIcon>💵</InPersonIcon>
+                <InPersonIcon><MdPayment size={24} /></InPersonIcon>
                 <InPersonText>
                   <InPersonLabel>Cash & Checks</InPersonLabel>
                   <InPersonDescription>
@@ -172,7 +240,7 @@ const GivingOptions = () => {
               </InPersonItem>
               
               <InPersonItem>
-                <InPersonIcon>📋</InPersonIcon>
+                <InPersonIcon><MdAssignment size={24} /></InPersonIcon>
                 <InPersonText>
                   <InPersonLabel>Giving Envelopes</InPersonLabel>
                   <InPersonDescription>
@@ -186,7 +254,7 @@ const GivingOptions = () => {
         )}
         
         <SecurityNote isVisible={isVisible} delay="0.5s">
-          <SecurityIcon>🔒</SecurityIcon>
+          <SecurityIcon><MdSecurity size={32} /></SecurityIcon>
           <SecurityContent>
             <SecurityTitle>Your Security Matters</SecurityTitle>
             <SecurityText>
@@ -197,13 +265,164 @@ const GivingOptions = () => {
         </SecurityNote>
       </Container>
     </Section>
+    </>
   )
 }
+
+// Animations
+const slideDown = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`
+
+// Modal Styled Components
+const AddressModal = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  animation: ${fadeIn} 0.3s ease-out;
+`
+
+const ModalContent = styled.div`
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 0 0 ${theme.borderRadius.xl} ${theme.borderRadius.xl};
+  box-shadow: ${theme.shadows.large};
+  max-width: 500px;
+  margin: 0 auto;
+  animation: ${slideDown} 0.5s ease-out;
+  overflow: hidden;
+`
+
+const ModalHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: ${theme.spacing.lg} ${theme.spacing.xl};
+  background: var(--color-primary-50);
+  border-bottom: 1px solid var(--border-color);
+`
+
+const ModalTitle = styled.h3`
+  font-family: ${theme.typography.fonts.accent};
+  font-size: ${theme.typography.sizes.lg};
+  font-weight: ${theme.typography.weights.medium};
+  color: var(--text-primary);
+  margin: 0;
+`
+
+const CloseButton = styled.button`
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: ${theme.spacing.xs};
+  border-radius: ${theme.borderRadius.md};
+  transition: var(--transition-theme);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  &:hover {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+  }
+`
+
+const ModalBody = styled.div`
+  padding: ${theme.spacing.xl};
+`
+
+const ModalText = styled.p`
+  font-family: ${theme.typography.fonts.primary};
+  font-size: ${theme.typography.sizes.base};
+  color: var(--text-secondary);
+  line-height: ${theme.typography.lineHeights.relaxed};
+  margin-bottom: ${theme.spacing.md};
+  
+  &:last-of-type {
+    margin-bottom: ${theme.spacing.lg};
+  }
+`
+
+const EmailCopySection = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${theme.spacing.md};
+  padding: ${theme.spacing.md};
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: ${theme.borderRadius.lg};
+  
+  @media (max-width: 480px) {
+    flex-direction: column;
+    gap: ${theme.spacing.sm};
+  }
+`
+
+const EmailAddress = styled.span`
+  font-family: ${theme.typography.fonts.secondary};
+  font-size: ${theme.typography.sizes.base};
+  font-weight: ${theme.typography.weights.medium};
+  color: var(--color-primary-600);
+  flex: 1;
+  word-break: break-all;
+`
+
+const CopyButton = styled.button`
+  display: flex;
+  align-items: center;
+  gap: ${theme.spacing.xs};
+  font-family: ${theme.typography.fonts.secondary};
+  font-size: ${theme.typography.sizes.sm};
+  font-weight: ${theme.typography.weights.medium};
+  color: var(--text-inverse);
+  background: ${props => props.copied ? 'var(--color-secondary-600)' : 'var(--color-primary-600)'};
+  border: none;
+  padding: ${theme.spacing.sm} ${theme.spacing.md};
+  border-radius: ${theme.borderRadius.md};
+  cursor: pointer;
+  transition: var(--transition-theme);
+  white-space: nowrap;
+  min-width: 100px;
+  justify-content: center;
+  
+  &:hover {
+    background: ${props => props.copied ? 'var(--color-secondary-700)' : 'var(--color-primary-700)'};
+  }
+  
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+  
+  @media (max-width: 480px) {
+    width: 100%;
+  }
+`
 
 // Styled Components
 const Section = styled.section`
   padding: ${theme.spacing['5xl']} 0;
-  background: ${theme.colors.neutral[50]};
+  background: var(--bg-secondary);
+  transition: var(--transition-theme);
   
   @media (max-width: 768px) {
     padding: ${theme.spacing['3xl']} 0;
@@ -233,7 +452,7 @@ const SectionLabel = styled.span`
   font-family: ${theme.typography.fonts.secondary};
   font-size: ${theme.typography.sizes.sm};
   font-weight: ${theme.typography.weights.medium};
-  color: ${theme.colors.secondary[600]};
+  color: var(--color-secondary-600);
   text-transform: uppercase;
   letter-spacing: 2px;
   margin-bottom: ${theme.spacing.md};
@@ -244,7 +463,7 @@ const MainHeading = styled.h2`
   font-family: ${theme.typography.fonts.accent};
   font-size: ${theme.typography.sizes['4xl']};
   font-weight: ${theme.typography.weights.light};
-  color: ${theme.colors.text.primary};
+  color: var(--text-primary);
   line-height: ${theme.typography.lineHeights.tight};
   margin-bottom: ${theme.spacing.lg};
   
@@ -256,19 +475,23 @@ const MainHeading = styled.h2`
 const Description = styled.p`
   font-family: ${theme.typography.fonts.primary};
   font-size: ${theme.typography.sizes.lg};
-  color: ${theme.colors.text.secondary};
+  color: var(--text-secondary);
   line-height: ${theme.typography.lineHeights.relaxed};
 `
 
 const GivingGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: ${theme.spacing.xl};
   margin-bottom: ${theme.spacing['3xl']};
   
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
     gap: ${theme.spacing.lg};
+  }
+  
+  @media (max-width: 480px) {
+    gap: ${theme.spacing.md};
   }
 `
 

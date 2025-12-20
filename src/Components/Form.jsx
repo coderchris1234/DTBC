@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import styled from 'styled-components'
+import { FaUser, FaEnvelope, FaPhone, FaHome, FaHeart, FaWhatsapp } from 'react-icons/fa'
 
 const Form = () => {
   const [formData, setFormData] = useState({
@@ -139,17 +140,17 @@ const Form = () => {
     const message = `
 🏛️ *New Contact Form Submission*
 
-👤 *Name:* ${formData.firstName} ${formData.lastName}
-📧 *Email:* ${formData.email}
-📱 *Phone:* ${formData.countryCode} ${formData.phoneNumber} (${formData.phoneType})
+*Name:* ${formData.firstName} ${formData.lastName}
+*Email:* ${formData.email}
+*Phone:* ${formData.countryCode} ${formData.phoneNumber} (${formData.phoneType})
 
-🏠 *Address:*
+*Address:*
 ${formData.streetAddress}${formData.aptUnit ? ', ' + formData.aptUnit : ''}
 ${formData.city}, ${formData.state} ${formData.zipCode || ''}
 
-💍 *Marital Status:* ${formData.maritalStatus}
+*Marital Status:* ${formData.maritalStatus}
 
-💬 *Message:*
+*Message:*
 ${formData.message || 'No additional message provided'}
 
 📅 *Submitted:* ${new Date().toLocaleDateString()} at ${new Date().toLocaleTimeString()}
@@ -411,7 +412,7 @@ _Sent from DTBC Website Contact Form_
             {/* WhatsApp Info */}
             <FieldGroup>
               <WhatsAppInfo>
-                <InfoText>💬 Your message will be sent directly to our WhatsApp number.</InfoText>
+                <InfoText><FaWhatsapp style={{ marginRight: '8px' }} />Your message will be sent directly to our WhatsApp number.</InfoText>
               </WhatsAppInfo>
             </FieldGroup>
 
@@ -439,7 +440,7 @@ _Sent from DTBC Website Contact Form_
               {isSubmitting ? (
                 'Sending to WhatsApp...'
               ) : (
-                <>💬 Send to WhatsApp</>
+                <><FaWhatsapp style={{ marginRight: '8px' }} />Send to WhatsApp</>
               )}
             </SubmitButton>
           </StyledForm>
