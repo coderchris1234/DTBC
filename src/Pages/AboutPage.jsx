@@ -1,14 +1,15 @@
-import React from 'react'
-import HeroSection from '../Components/HeroSection'
-import PrayerSection from '../Components/PrayerSection'
-import ChildrenSection from '../Components/ChildrenSection'
+import AboutHero from '../Components/AboutHero'
+import ChurchStory from '../Components/ChurchStory'
+import LeadershipSection from '../Components/LeadershipSection'
+import ValuesSection from '../Components/ValuesSection'
 
 const AboutPage = () => {
   return (
     <div>
-        <HeroSection />
-        <PrayerSection />
-        <ChildrenSection />
+      <AboutHero />
+      <ChurchStory />
+      <LeadershipSection />
+      <ValuesSection />
     </div>
   )
 }

@@ -3,46 +3,37 @@ import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { theme } from '../styles/theme'
 
-const Hero = () => {
+const VisitHero = () => {
   const [isVisible, setIsVisible] = useState(false)
   const navigate = useNavigate()
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsVisible(true)
-    }, 100)
-    
-    return () => clearTimeout(timer)
+    setIsVisible(true)
   }, [])
-
-  const handlePlanVisit = () => {
-    navigate('/visit')
-  }
 
   return (
     <HeroSection>
       <HeroOverlay />
       <Container>
         <HeroContent isVisible={isVisible}>
-          <WelcomeText>Welcome to</WelcomeText>
-          <HeroTitle>Divine Touch Bible Church</HeroTitle>
+          <Breadcrumb>Home / Visit</Breadcrumb>
+          <HeroTitle>Plan Your Visit</HeroTitle>
           <HeroSubtitle>
-            A place where faith meets community, and hearts find their home in God's love.
+            We can't wait to meet you and welcome you into our church family. 
+            Here's everything you need to know for your first visit.
           </HeroSubtitle>
           <ButtonContainer>
-            <PrimaryButton onClick={handlePlanVisit}>
-              Plan Your Visit
+            <PrimaryButton onClick={() => navigate('/contact')}>
+              Let Us Know You're Coming
             </PrimaryButton>
-            <SecondaryButton onClick={() => navigate('/about')}>
-              Learn More
+            <SecondaryButton onClick={() => {
+              document.getElementById('service-times')?.scrollIntoView({ behavior: 'smooth' })
+            }}>
+              View Service Times
             </SecondaryButton>
           </ButtonContainer>
         </HeroContent>
       </Container>
-      <ScrollIndicator>
-        <ScrollText>Discover More</ScrollText>
-        <ScrollArrow>↓</ScrollArrow>
-      </ScrollIndicator>
     </HeroSection>
   )
 }
@@ -50,23 +41,24 @@ const Hero = () => {
 // Styled Components
 const HeroSection = styled.section`
   position: relative;
-  height: 100vh;
-  min-height: 600px;
+  height: 70vh;
+  min-height: 500px;
   background: linear-gradient(
     135deg,
-    var(--color-neutral-100) 0%,
-    var(--color-primary-50) 50%,
-    var(--color-secondary-50) 100%
+    ${theme.colors.primary[100]} 0%,
+    ${theme.colors.secondary[100]} 50%,
+    ${theme.colors.accent.cream} 100%
   );
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  transition: var(--transition-theme);
+  margin-top: 80px;
   
   @media (max-width: 768px) {
-    min-height: 500px;
-    padding-top: 70px;
+    height: 60vh;
+    min-height: 400px;
+    margin-top: 70px;
   }
 `
 
@@ -76,7 +68,7 @@ const HeroOverlay = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="0.5" fill="%23b8b8b0" opacity="0.1"/><circle cx="75" cy="75" r="0.3" fill="%23d9ccb8" opacity="0.1"/><circle cx="50" cy="10" r="0.4" fill="%23c8d4c8" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="0.5" fill="%23${theme.colors.neutral[300].slice(1)}" opacity="0.1"/><circle cx="75" cy="75" r="0.3" fill="%23${theme.colors.primary[300].slice(1)}" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
   opacity: 0.3;
   z-index: 1;
 `
@@ -102,21 +94,20 @@ const HeroContent = styled.div`
   transition: all 1s ease-out;
 `
 
-const WelcomeText = styled.p`
+const Breadcrumb = styled.nav`
   font-family: ${theme.typography.fonts.secondary};
-  font-size: ${theme.typography.sizes.lg};
-  font-weight: ${theme.typography.weights.medium};
-  color: var(--text-secondary);
-  margin-bottom: ${theme.spacing.sm};
-  letter-spacing: 2px;
+  font-size: ${theme.typography.sizes.sm};
+  color: ${theme.colors.text.muted};
+  margin-bottom: ${theme.spacing.md};
   text-transform: uppercase;
+  letter-spacing: 1px;
 `
 
 const HeroTitle = styled.h1`
   font-family: ${theme.typography.fonts.accent};
   font-size: ${theme.typography.sizes['6xl']};
   font-weight: ${theme.typography.weights.light};
-  color: var(--text-primary);
+  color: ${theme.colors.text.primary};
   margin-bottom: ${theme.spacing.lg};
   line-height: ${theme.typography.lineHeights.tight};
   
@@ -133,17 +124,13 @@ const HeroSubtitle = styled.p`
   font-family: ${theme.typography.fonts.primary};
   font-size: ${theme.typography.sizes.xl};
   font-weight: ${theme.typography.weights.normal};
-  color: var(--text-secondary);
-  margin-bottom: ${theme.spacing['3xl']};
+  color: ${theme.colors.text.secondary};
   line-height: ${theme.typography.lineHeights.relaxed};
   max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: ${theme.spacing['3xl']};
+  margin: 0 auto ${theme.spacing['2xl']};
   
   @media (max-width: 768px) {
     font-size: ${theme.typography.sizes.lg};
-    margin-bottom: ${theme.spacing['2xl']};
   }
   
   @media (max-width: 480px) {
@@ -167,17 +154,17 @@ const PrimaryButton = styled.button`
   font-family: ${theme.typography.fonts.secondary};
   font-size: ${theme.typography.sizes.base};
   font-weight: ${theme.typography.weights.medium};
-  color: var(--text-inverse);
-  background: var(--color-primary-600);
+  color: ${theme.colors.white};
+  background: ${theme.colors.primary[600]};
   border: none;
   padding: ${theme.spacing.md} ${theme.spacing.xl};
   border-radius: ${theme.borderRadius.lg};
   cursor: pointer;
-  transition: var(--transition-theme);
+  transition: all 0.3s ease;
   box-shadow: ${theme.shadows.soft};
   
   &:hover {
-    background: var(--color-primary-700);
+    background: ${theme.colors.primary[700]};
     transform: translateY(-2px);
     box-shadow: ${theme.shadows.medium};
   }
@@ -196,17 +183,17 @@ const SecondaryButton = styled.button`
   font-family: ${theme.typography.fonts.secondary};
   font-size: ${theme.typography.sizes.base};
   font-weight: ${theme.typography.weights.medium};
-  color: var(--color-primary-600);
+  color: ${theme.colors.primary[600]};
   background: transparent;
-  border: 2px solid var(--color-primary-300);
+  border: 2px solid ${theme.colors.primary[300]};
   padding: ${theme.spacing.md} ${theme.spacing.xl};
   border-radius: ${theme.borderRadius.lg};
   cursor: pointer;
-  transition: var(--transition-theme);
+  transition: all 0.3s ease;
   
   &:hover {
-    background: var(--color-primary-50);
-    border-color: var(--color-primary-400);
+    background: ${theme.colors.primary[50]};
+    border-color: ${theme.colors.primary[400]};
     transform: translateY(-2px);
   }
   
@@ -220,46 +207,4 @@ const SecondaryButton = styled.button`
   }
 `
 
-const ScrollIndicator = styled.div`
-  position: absolute;
-  bottom: ${theme.spacing.xl};
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: ${theme.spacing.xs};
-  z-index: 2;
-  
-  @media (max-width: 768px) {
-    display: none;
-  }
-`
-
-const ScrollText = styled.span`
-  font-family: ${theme.typography.fonts.secondary};
-  font-size: ${theme.typography.sizes.sm};
-  color: var(--text-muted);
-  letter-spacing: 1px;
-  text-transform: uppercase;
-`
-
-const ScrollArrow = styled.div`
-  font-size: ${theme.typography.sizes.lg};
-  color: var(--text-muted);
-  animation: bounce 2s infinite;
-  
-  @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-      transform: translateY(0);
-    }
-    40% {
-      transform: translateY(-10px);
-    }
-    60% {
-      transform: translateY(-5px);
-    }
-  }
-`
-
-export default Hero
+export default VisitHero

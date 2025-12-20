@@ -1,14 +1,15 @@
-import React from 'react'
-import HeroVisit from '../Components/HeroVisit'
-import Direction from '../Components/Direction'
-import Place from '../Components/Place'
+import VisitHero from '../Components/VisitHero'
+import ServiceTimes from '../Components/ServiceTimes'
+import WhatToExpect from '../Components/WhatToExpect'
+import LocationsMap from '../Components/LocationsMap'
 
 const Visit = () => {
   return (
     <div>
-        <HeroVisit />
-        <Direction />
-        <Place />
+      <VisitHero />
+      <ServiceTimes />
+      <WhatToExpect />
+      <LocationsMap />
     </div>
   )
 }

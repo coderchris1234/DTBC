@@ -1,14 +1,13 @@
-import React from 'react'
-import HeroGive from '../Components/HeroGive'
-import Bank from '../Components/Bank'
-import HelpGive from '../Components/HelpGive'
+import GiveHero from '../Components/GiveHero'
+import WhyWeGive from '../Components/WhyWeGive'
+import GivingOptions from '../Components/GivingOptions'
 
 const GivePage = () => {
   return (
     <div>
-        <HeroGive />
-        <Bank />
-        <HelpGive />
+      <GiveHero />
+      <WhyWeGive />
+      <GivingOptions />
     </div>
   )
 }
