@@ -1,9 +1,12 @@
 import { useState, useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
+import { theme } from '../styles/theme'
 
 const Hope = () => {
   const [isVisible, setIsVisible] = useState(false)
   const sectionRef = useRef(null)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -16,13 +19,14 @@ const Hope = () => {
       }
     )
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
+    const currentRef = sectionRef.current
+    if (currentRef) {
+      observer.observe(currentRef)
     }
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current)
+      if (currentRef) {
+        observer.unobserve(currentRef)
       }
     }
   }, [])
@@ -30,47 +34,70 @@ const Hope = () => {
   return (
     <HopeSection ref={sectionRef}>
       <Container>
-        <MainTitle isVisible={isVisible}>
-          It All Starts Here.
-        </MainTitle>
+        <HeaderContent isVisible={isVisible}>
+          <SectionLabel>Your Journey</SectionLabel>
+          <MainTitle>
+            Your Faith Journey Begins Here
+          </MainTitle>
+          <Description>
+            Whether you're exploring faith for the first time or looking to deepen your relationship with God, 
+            we're here to walk alongside you every step of the way.
+          </Description>
+        </HeaderContent>
         
-        <CardsGrid>
-          <HopeCard isVisible={isVisible} animationDelay="0.2s" direction="left">
-            <CardImage 
-              src="https://images.unsplash.com/photo-1507692049790-de58290a4334?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-              alt="Church service"
-            />
-            <CardContent>
-              <CardText>
-                Attend a service in person or online. We would love to meet you!
-              </CardText>
-            </CardContent>
-          </HopeCard>
+        <JourneyGrid>
+          <JourneyStep isVisible={isVisible} delay="0.2s">
+            <StepNumber>1</StepNumber>
+            <StepIcon>🚪</StepIcon>
+            <StepTitle>Take the First Step</StepTitle>
+            <StepDescription>
+              Join us for a service in person or online. Experience our welcoming community 
+              and discover what makes our church family special.
+            </StepDescription>
+            <StepAction onClick={() => navigate('/visit')}>
+              Plan Your Visit
+            </StepAction>
+          </JourneyStep>
           
-          <HopeCard isVisible={isVisible} animationDelay="0.4s" direction="center">
-            <CardImage 
-              src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-              alt="Community gathering"
-            />
-            <CardContent>
-              <CardText>
-                We've designed a path for you and your family to grow in your faith, find friends, and serve others.
-              </CardText>
-            </CardContent>
-          </HopeCard>
+          <JourneyStep isVisible={isVisible} delay="0.4s">
+            <StepNumber>2</StepNumber>
+            <StepIcon>🌱</StepIcon>
+            <StepTitle>Grow in Faith</StepTitle>
+            <StepDescription>
+              Connect with others through small groups, Bible studies, and ministry opportunities. 
+              Find your place in our community and grow in your relationship with God.
+            </StepDescription>
+            <StepAction onClick={() => navigate('/about')}>
+              Learn More
+            </StepAction>
+          </JourneyStep>
           
-          <HopeCard isVisible={isVisible} animationDelay="0.6s" direction="right">
-            <CardImage 
-              src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80"
-              alt="Prayer and support"
-            />
-            <CardContent>
-              <CardText>
-                Have a question or need prayer? Let our team know and we will reach out to you.
-              </CardText>
-            </CardContent>
-          </HopeCard>
-        </CardsGrid>
+          <JourneyStep isVisible={isVisible} delay="0.6s">
+            <StepNumber>3</StepNumber>
+            <StepIcon>🤝</StepIcon>
+            <StepTitle>Make a Difference</StepTitle>
+            <StepDescription>
+              Use your gifts to serve others and make an impact in our community and beyond. 
+              Discover how God can use you to touch lives and spread His love.
+            </StepDescription>
+            <StepAction onClick={() => navigate('/contact')}>
+              Get Involved
+            </StepAction>
+          </JourneyStep>
+        </JourneyGrid>
+        
+        <CallToAction isVisible={isVisible} delay="0.8s">
+          <CTAContent>
+            <CTATitle>Ready to Begin?</CTATitle>
+            <CTAText>
+              We're here to support you on your faith journey. Reach out with any questions 
+              or to learn more about our community.
+            </CTAText>
+            <CTAButton onClick={() => navigate('/contact')}>
+              Connect With Us
+            </CTAButton>
+          </CTAContent>
+        </CallToAction>
       </Container>
     </HopeSection>
   )
@@ -78,134 +105,202 @@ const Hope = () => {
 
 // Styled Components
 const HopeSection = styled.section`
-  background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #2563eb 100%);
-  padding: 5rem 0;
+  background: ${theme.colors.primary[50]};
+  padding: ${theme.spacing['5xl']} 0;
   position: relative;
-  overflow: hidden;
-  width: 100%;
   
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at 30% 20%, rgba(59, 130, 246, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 70% 80%, rgba(147, 197, 253, 0.2) 0%, transparent 50%);
-    pointer-events: none;
+  @media (max-width: 768px) {
+    padding: ${theme.spacing['3xl']} 0;
   }
 `
 
 const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
-  position: relative;
-  z-index: 1;
+  padding: 0 ${theme.spacing.lg};
   
   @media (max-width: 768px) {
-    padding: 0 1rem;
+    padding: 0 ${theme.spacing.md};
   }
 `
 
-const MainTitle = styled.h1`
-  font-size: 3rem;
-  font-weight: bold;
+const HeaderContent = styled.div`
   text-align: center;
-  color: #93c5fd;
-  margin-bottom: 4rem;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  opacity: ${props => props.isVisible ? '1' : '0'};
-  transform: translateY(${props => props.isVisible ? '0' : '50px'}) scale(${props => props.isVisible ? '1' : '0.9'});
-  transition: all 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+  max-width: 800px;
+  margin: 0 auto ${theme.spacing['4xl']};
+  opacity: ${props => props.isVisible ? 1 : 0};
+  transform: translateY(${props => props.isVisible ? '0' : '30px'});
+  transition: all 0.8s ease-out;
+`
+
+const SectionLabel = styled.span`
+  font-family: ${theme.typography.fonts.secondary};
+  font-size: ${theme.typography.sizes.sm};
+  font-weight: ${theme.typography.weights.medium};
+  color: ${theme.colors.primary[600]};
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: ${theme.spacing.md};
+  display: block;
+`
+
+const MainTitle = styled.h2`
+  font-family: ${theme.typography.fonts.accent};
+  font-size: ${theme.typography.sizes['5xl']};
+  font-weight: ${theme.typography.weights.light};
+  color: ${theme.colors.text.primary};
+  line-height: ${theme.typography.lineHeights.tight};
+  margin-bottom: ${theme.spacing.lg};
   
   @media (max-width: 768px) {
-    font-size: 2.5rem;
-    margin-bottom: 3rem;
-  }
-  
-  @media (max-width: 480px) {
-    font-size: 2rem;
+    font-size: ${theme.typography.sizes['3xl']};
   }
 `
 
-const CardsGrid = styled.div`
+const Description = styled.p`
+  font-family: ${theme.typography.fonts.primary};
+  font-size: ${theme.typography.sizes.lg};
+  color: ${theme.colors.text.secondary};
+  line-height: ${theme.typography.lineHeights.relaxed};
+`
+
+const JourneyGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+  gap: ${theme.spacing['2xl']};
+  margin-bottom: ${theme.spacing['3xl']};
   
   @media (max-width: 1024px) {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
+    gap: ${theme.spacing.xl};
   }
 `
 
-const HopeCard = styled.div`
-  background: white;
-  border-radius: 1rem;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-  transition-delay: ${props => props.animationDelay || '0s'};
-  
-  opacity: ${props => props.isVisible ? '1' : '0'};
-  transform: ${props => {
-    if (!props.isVisible) {
-      switch(props.direction) {
-        case 'left': return 'translateX(-50px) translateY(30px) rotate(-3deg) scale(0.9)';
-        case 'right': return 'translateX(50px) translateY(30px) rotate(3deg) scale(0.9)';
-        case 'center': return 'translateY(-50px) scale(0.9)';
-        default: return 'translateY(50px) scale(0.9)';
-      }
-    }
-    return 'translateX(0) translateY(0) rotate(0) scale(1)';
-  }};
+const JourneyStep = styled.div`
+  background: ${theme.colors.white};
+  padding: ${theme.spacing['2xl']};
+  border-radius: ${theme.borderRadius.xl};
+  text-align: center;
+  box-shadow: ${theme.shadows.subtle};
+  border: 1px solid ${theme.colors.neutral[200]};
+  transition: all 0.3s ease;
+  opacity: ${props => props.isVisible ? 1 : 0};
+  transform: translateY(${props => props.isVisible ? '0' : '30px'});
+  transition: all 0.8s ease-out;
+  transition-delay: ${props => props.delay || '0s'};
   
   &:hover {
-    transform: translateY(-10px) scale(1.02) !important;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-  }
-  
-  @media (max-width: 1024px) {
-    &:hover {
-      transform: translateY(-5px) scale(1.01) !important;
-    }
+    transform: translateY(-8px);
+    box-shadow: ${theme.shadows.medium};
   }
 `
 
-const CardImage = styled.img`
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-  transition: transform 0.3s ease;
+const StepNumber = styled.div`
+  width: 40px;
+  height: 40px;
+  background: ${theme.colors.primary[600]};
+  color: ${theme.colors.white};
+  border-radius: ${theme.borderRadius.full};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: ${theme.typography.fonts.secondary};
+  font-size: ${theme.typography.sizes.lg};
+  font-weight: ${theme.typography.weights.semibold};
+  margin: 0 auto ${theme.spacing.md};
+`
+
+const StepIcon = styled.div`
+  font-size: ${theme.typography.sizes['3xl']};
+  margin-bottom: ${theme.spacing.lg};
+`
+
+const StepTitle = styled.h3`
+  font-family: ${theme.typography.fonts.accent};
+  font-size: ${theme.typography.sizes.xl};
+  font-weight: ${theme.typography.weights.medium};
+  color: ${theme.colors.text.primary};
+  margin-bottom: ${theme.spacing.md};
+`
+
+const StepDescription = styled.p`
+  font-family: ${theme.typography.fonts.primary};
+  font-size: ${theme.typography.sizes.base};
+  color: ${theme.colors.text.secondary};
+  line-height: ${theme.typography.lineHeights.relaxed};
+  margin-bottom: ${theme.spacing.lg};
+`
+
+const StepAction = styled.button`
+  font-family: ${theme.typography.fonts.secondary};
+  font-size: ${theme.typography.sizes.sm};
+  font-weight: ${theme.typography.weights.medium};
+  color: ${theme.colors.primary[600]};
+  background: transparent;
+  border: 2px solid ${theme.colors.primary[300]};
+  padding: ${theme.spacing.sm} ${theme.spacing.lg};
+  border-radius: ${theme.borderRadius.lg};
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   
-  ${HopeCard}:hover & {
-    transform: scale(1.05);
-  }
-  
-  @media (max-width: 768px) {
-    height: 200px;
+  &:hover {
+    background: ${theme.colors.primary[50]};
+    border-color: ${theme.colors.primary[400]};
+    transform: translateY(-2px);
   }
 `
 
-const CardContent = styled.div`
-  padding: 2rem;
+const CallToAction = styled.div`
   text-align: center;
-  
-  @media (max-width: 768px) {
-    padding: 1.5rem;
-  }
+  padding: ${theme.spacing['2xl']};
+  background: ${theme.colors.white};
+  border-radius: ${theme.borderRadius.xl};
+  box-shadow: ${theme.shadows.soft};
+  border: 1px solid ${theme.colors.neutral[200]};
+  opacity: ${props => props.isVisible ? 1 : 0};
+  transform: translateY(${props => props.isVisible ? '0' : '30px'});
+  transition: all 0.8s ease-out;
+  transition-delay: ${props => props.delay || '0s'};
 `
 
-const CardText = styled.p`
-  font-size: 1.125rem;
-  color: #374151;
-  line-height: 1.6;
-  font-weight: 500;
+const CTAContent = styled.div`
+  max-width: 600px;
+  margin: 0 auto;
+`
+
+const CTATitle = styled.h3`
+  font-family: ${theme.typography.fonts.accent};
+  font-size: ${theme.typography.sizes['2xl']};
+  font-weight: ${theme.typography.weights.medium};
+  color: ${theme.colors.text.primary};
+  margin-bottom: ${theme.spacing.md};
+`
+
+const CTAText = styled.p`
+  font-family: ${theme.typography.fonts.primary};
+  font-size: ${theme.typography.sizes.lg};
+  color: ${theme.colors.text.secondary};
+  line-height: ${theme.typography.lineHeights.relaxed};
+  margin-bottom: ${theme.spacing.lg};
+`
+
+const CTAButton = styled.button`
+  font-family: ${theme.typography.fonts.secondary};
+  font-size: ${theme.typography.sizes.base};
+  font-weight: ${theme.typography.weights.medium};
+  color: ${theme.colors.white};
+  background: ${theme.colors.primary[600]};
+  border: none;
+  padding: ${theme.spacing.md} ${theme.spacing.xl};
+  border-radius: ${theme.borderRadius.lg};
+  cursor: pointer;
+  transition: all 0.3s ease;
   
-  @media (max-width: 768px) {
-    font-size: 1rem;
+  &:hover {
+    background: ${theme.colors.primary[700]};
+    transform: translateY(-2px);
   }
 `
 

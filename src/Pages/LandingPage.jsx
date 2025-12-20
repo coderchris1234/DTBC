@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react'
 import Hero from '../Components/Hero'
-import Service from '../Components/Service'
-import Purpose from '../Components/Purpose'
+import WelcomeSection from '../Components/WelcomeSection'
+import VisionSection from '../Components/VisionSection'
 import Hope from '../Components/Hope'
-import Sermons from '../Components/Sermons'
 import WelcomeModal from '../Components/WelcomeModal'
 
 const LandingPage = () => {
@@ -37,10 +36,9 @@ const LandingPage = () => {
         onClose={handleCloseModal}
       />
       <Hero/>
-      <Service />
-      <Purpose />
+      <WelcomeSection />
+      <VisionSection />
       <Hope />
-      <Sermons />
     </>
   )
 }
