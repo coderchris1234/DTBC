@@ -21,8 +21,12 @@ const ContactForm = () => {
     const isMobile = window.innerWidth <= 768
     
     if (isMobile) {
-      // On mobile, make visible immediately
-      setIsVisible(true)
+      // On mobile, make visible immediately with a timeout to avoid cascading renders
+      const timer = setTimeout(() => {
+        setIsVisible(true)
+      }, 0)
+      
+      return () => clearTimeout(timer)
     } else {
       // On desktop, use intersection observer
       const observer = new IntersectionObserver(

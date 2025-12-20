@@ -1,191 +1,191 @@
-// Refined Design System for DTBC
+// Refined Design System for DTBC - Warm Blue Aesthetic
 export const theme = {
   colors: {
     light: {
-      // Primary palette - warm, earthy tones
+      // Primary palette - warm, sophisticated blues
       primary: {
-        50: '#faf9f7',
-        100: '#f5f2ed',
-        200: '#e8e1d4',
-        300: '#d9ccb8',
-        400: '#c7b299',
-        500: '#b5967a', // Main brand color - warm taupe
-        600: '#9d7f63',
-        700: '#7d6450',
-        800: '#5f4d3e',
-        900: '#433729'
+        50: '#f0f4f8',
+        100: '#d9e2ec',
+        200: '#bcccdc',
+        300: '#9fb3c8',
+        400: '#829ab1',
+        500: '#627d98', // Main brand color - warm steel blue
+        600: '#486581',
+        700: '#334e68',
+        800: '#243b53',
+        900: '#102a43'
       },
       
-      // Secondary palette - soft sage
+      // Secondary palette - soft teal blues
       secondary: {
-        50: '#f7f9f7',
-        100: '#eff3ef',
-        200: '#dde5dd',
-        300: '#c8d4c8',
-        400: '#b0c0b0',
-        500: '#96a896', // Soft sage green
-        600: '#7d8f7d',
-        700: '#647164',
-        800: '#4d564d',
-        900: '#383d38'
+        50: '#f0fdfa',
+        100: '#ccfbf1',
+        200: '#99f6e4',
+        300: '#5eead4',
+        400: '#2dd4bf',
+        500: '#14b8a6', // Soft teal
+        600: '#0d9488',
+        700: '#0f766e',
+        800: '#115e59',
+        900: '#134e4a'
       },
       
-      // Neutral palette - warm grays
+      // Neutral palette - warm blue-grays
       neutral: {
-        50: '#fafaf9',
-        100: '#f4f4f2',
-        200: '#e6e6e3',
-        300: '#d1d1cc',
-        400: '#b8b8b0',
-        500: '#9c9c91',
-        600: '#7d7d72',
-        700: '#5f5f56',
-        800: '#44443d',
-        900: '#2c2c27'
+        50: '#f8fafc',
+        100: '#f1f5f9',
+        200: '#e2e8f0',
+        300: '#cbd5e1',
+        400: '#94a3b8',
+        500: '#64748b',
+        600: '#475569',
+        700: '#334155',
+        800: '#1e293b',
+        900: '#0f172a'
       },
       
-      // Accent colors
+      // Accent colors - complementary warm tones
       accent: {
-        gold: '#d4af37',
-        cream: '#f8f6f0',
-        stone: '#8b8680'
+        gold: '#f59e0b',
+        cream: '#fef7ed',
+        stone: '#78716c'
       },
       
-      // Semantic colors
+      // Semantic colors - light mode
       background: {
         primary: '#ffffff',
-        secondary: '#fafaf9',
-        tertiary: '#f4f4f2'
+        secondary: '#f8fafc',
+        tertiary: '#f1f5f9'
       },
       text: {
-        primary: '#2c2c27',
-        secondary: '#5f5f56',
-        muted: '#9c9c91',
+        primary: '#0f172a',
+        secondary: '#334155',
+        muted: '#64748b',
         inverse: '#ffffff'
       },
-      border: '#e6e6e3',
-      shadow: 'rgba(44, 44, 39, 0.1)'
+      border: '#e2e8f0',
+      shadow: 'rgba(15, 23, 42, 0.1)'
     },
     
     dark: {
       // Primary palette - adjusted for dark mode
       primary: {
-        50: '#433729',
-        100: '#5f4d3e',
-        200: '#7d6450',
-        300: '#9d7f63',
-        400: '#b5967a',
-        500: '#c7b299', // Lighter in dark mode
-        600: '#d9ccb8',
-        700: '#e8e1d4',
-        800: '#f5f2ed',
-        900: '#faf9f7'
+        50: '#102a43',
+        100: '#243b53',
+        200: '#334e68',
+        300: '#486581',
+        400: '#627d98',
+        500: '#829ab1', // Lighter in dark mode
+        600: '#9fb3c8',
+        700: '#bcccdc',
+        800: '#d9e2ec',
+        900: '#f0f4f8'
       },
       
       // Secondary palette - adjusted for dark mode
       secondary: {
-        50: '#383d38',
-        100: '#4d564d',
-        200: '#647164',
-        300: '#7d8f7d',
-        400: '#96a896',
-        500: '#b0c0b0',
-        600: '#c8d4c8',
-        700: '#dde5dd',
-        800: '#eff3ef',
-        900: '#f7f9f7'
+        50: '#134e4a',
+        100: '#115e59',
+        200: '#0f766e',
+        300: '#0d9488',
+        400: '#14b8a6',
+        500: '#2dd4bf',
+        600: '#5eead4',
+        700: '#99f6e4',
+        800: '#ccfbf1',
+        900: '#f0fdfa'
       },
       
       // Neutral palette - dark mode
       neutral: {
-        50: '#1a1a17',
-        100: '#2c2c27',
-        200: '#44443d',
-        300: '#5f5f56',
-        400: '#7d7d72',
-        500: '#9c9c91',
-        600: '#b8b8b0',
-        700: '#d1d1cc',
-        800: '#e6e6e3',
-        900: '#fafaf9'
+        50: '#0f172a',
+        100: '#1e293b',
+        200: '#334155',
+        300: '#475569',
+        400: '#64748b',
+        500: '#94a3b8',
+        600: '#cbd5e1',
+        700: '#e2e8f0',
+        800: '#f1f5f9',
+        900: '#f8fafc'
       },
       
       // Accent colors - adjusted for dark mode
       accent: {
-        gold: '#f4d03f',
-        cream: '#2c2c27',
-        stone: '#a8a39e'
+        gold: '#fbbf24',
+        cream: '#1e293b',
+        stone: '#a8a29e'
       },
       
       // Semantic colors - dark mode
       background: {
-        primary: '#1a1a17',
-        secondary: '#2c2c27',
-        tertiary: '#44443d'
+        primary: '#0f172a',
+        secondary: '#1e293b',
+        tertiary: '#334155'
       },
       text: {
-        primary: '#fafaf9',
-        secondary: '#d1d1cc',
-        muted: '#9c9c91',
-        inverse: '#2c2c27'
+        primary: '#f8fafc',
+        secondary: '#e2e8f0',
+        muted: '#94a3b8',
+        inverse: '#0f172a'
       },
-      border: '#44443d',
+      border: '#334155',
       shadow: 'rgba(0, 0, 0, 0.3)'
     },
     
     // Backward compatibility - maintain old structure for existing components
     // This allows gradual migration to the new theme system
     primary: {
-      50: '#faf9f7',
-      100: '#f5f2ed',
-      200: '#e8e1d4',
-      300: '#d9ccb8',
-      400: '#c7b299',
-      500: '#b5967a',
-      600: '#9d7f63',
-      700: '#7d6450',
-      800: '#5f4d3e',
-      900: '#433729'
+      50: '#f0f4f8',
+      100: '#d9e2ec',
+      200: '#bcccdc',
+      300: '#9fb3c8',
+      400: '#829ab1',
+      500: '#627d98',
+      600: '#486581',
+      700: '#334e68',
+      800: '#243b53',
+      900: '#102a43'
     },
     
     secondary: {
-      50: '#f7f9f7',
-      100: '#eff3ef',
-      200: '#dde5dd',
-      300: '#c8d4c8',
-      400: '#b0c0b0',
-      500: '#96a896',
-      600: '#7d8f7d',
-      700: '#647164',
-      800: '#4d564d',
-      900: '#383d38'
+      50: '#f0fdfa',
+      100: '#ccfbf1',
+      200: '#99f6e4',
+      300: '#5eead4',
+      400: '#2dd4bf',
+      500: '#14b8a6',
+      600: '#0d9488',
+      700: '#0f766e',
+      800: '#115e59',
+      900: '#134e4a'
     },
     
     neutral: {
-      50: '#fafaf9',
-      100: '#f4f4f2',
-      200: '#e6e6e3',
-      300: '#d1d1cc',
-      400: '#b8b8b0',
-      500: '#9c9c91',
-      600: '#7d7d72',
-      700: '#5f5f56',
-      800: '#44443d',
-      900: '#2c2c27'
+      50: '#f8fafc',
+      100: '#f1f5f9',
+      200: '#e2e8f0',
+      300: '#cbd5e1',
+      400: '#94a3b8',
+      500: '#64748b',
+      600: '#475569',
+      700: '#334155',
+      800: '#1e293b',
+      900: '#0f172a'
     },
     
     accent: {
-      gold: '#d4af37',
-      cream: '#f8f6f0',
-      stone: '#8b8680'
+      gold: '#f59e0b',
+      cream: '#fef7ed',
+      stone: '#78716c'
     },
     
     white: '#ffffff',
-    black: '#1a1a17',
+    black: '#0f172a',
     text: {
-      primary: '#2c2c27',
-      secondary: '#5f5f56',
-      muted: '#9c9c91'
+      primary: '#0f172a',
+      secondary: '#334155',
+      muted: '#64748b'
     }
   },
   
