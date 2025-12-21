@@ -4,9 +4,11 @@ import { theme } from '../styles/theme'
 import { FaPlay, FaYoutube, FaCalendarAlt, FaClock } from 'react-icons/fa'
 import { SermonCardSkeleton, PageSkeleton } from './SkeletonLoader'
 import { usePageLoading } from '../hooks/usePageLoading'
+import { useLiveStream } from '../hooks/useLiveStream'
 
 const SermonsList = () => {
   const [isVisible, setIsVisible] = useState(true) // Start visible
+  const { isLive, liveUrl } = useLiveStream() // Use the live stream hook
   const isLoading = usePageLoading(600) // Show skeleton for 600ms
   const sectionRef = useRef(null)
 
@@ -64,7 +66,11 @@ const SermonsList = () => {
   ]
 
   const handleViewMore = () => {
-    window.open('https://www.youtube.com/playlist?list=PLhhjC515-IIjINZvrIvpwmYCBrUjY3Cvu', '_blank')
+    if (isLive) {
+      window.open(liveUrl, '_blank')
+    } else {
+      window.open('https://www.youtube.com/playlist?list=PLhhjC515-IIjINZvrIvpwmYCBrUjY3Cvu', '_blank')
+    }
   }
 
   const handleSermonClick = (videoUrl) => {
@@ -168,12 +174,25 @@ const SermonsList = () => {
         </SermonsGrid>
         
         <ViewMoreSection isVisible={isVisible} delay="0.5s">
-          <ViewMoreButton onClick={handleViewMore}>
-            <FaYoutube size={20} />
-            View All Sermons on YouTube
+          <ViewMoreButton onClick={handleViewMore} isLive={isLive}>
+            {isLive ? (
+              <>
+                <LiveIndicator />
+                <FaYoutube size={20} />
+                LIVE NOW - Join Service
+              </>
+            ) : (
+              <>
+                <FaYoutube size={20} />
+                View All Sermons on YouTube
+              </>
+            )}
           </ViewMoreButton>
           <ViewMoreText>
-            Access our complete sermon library and subscribe to stay updated with new messages.
+            {isLive 
+              ? "We're currently live! Click to join our worship service now."
+              : "Access our complete sermon library and subscribe to stay updated with new messages."
+            }
           </ViewMoreText>
         </ViewMoreSection>
       </Container>
@@ -379,18 +398,54 @@ const ViewMoreButton = styled.button`
   font-size: ${theme.typography.sizes.base};
   font-weight: ${theme.typography.weights.medium};
   color: #ffffff;
-  background: #ff0000;
+  background: ${props => props.isLive ? '#ff4444' : '#ff0000'};
   border: none;
   padding: ${theme.spacing.md} ${theme.spacing.xl};
   border-radius: ${theme.borderRadius.lg};
   cursor: pointer;
   transition: all 0.3s ease;
   margin-bottom: ${theme.spacing.md};
+  position: relative;
+  overflow: hidden;
+  
+  ${props => props.isLive && `
+    animation: pulse 2s infinite;
+    box-shadow: 0 0 20px rgba(255, 68, 68, 0.5);
+  `}
   
   &:hover {
-    background: #cc0000;
+    background: ${props => props.isLive ? '#ff6666' : '#cc0000'};
     transform: translateY(-2px);
     box-shadow: ${theme.shadows.medium};
+  }
+  
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(255, 68, 68, 0.7);
+    }
+    70% {
+      box-shadow: 0 0 0 10px rgba(255, 68, 68, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(255, 68, 68, 0);
+    }
+  }
+`
+
+const LiveIndicator = styled.div`
+  width: 8px;
+  height: 8px;
+  background: #ffffff;
+  border-radius: 50%;
+  animation: blink 1s infinite;
+  
+  @keyframes blink {
+    0%, 50% {
+      opacity: 1;
+    }
+    51%, 100% {
+      opacity: 0.3;
+    }
   }
 `
 
