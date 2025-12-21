@@ -5,10 +5,12 @@ import { FaPlay, FaYoutube, FaCalendarAlt, FaClock } from 'react-icons/fa'
 import { SermonCardSkeleton, PageSkeleton } from './SkeletonLoader'
 import { usePageLoading } from '../hooks/usePageLoading'
 import { useLiveStream } from '../hooks/useLiveStream'
+import SermonPlaceholder from './SermonPlaceholder'
 
 const SermonsList = () => {
   const [isVisible, setIsVisible] = useState(true) // Start visible
   const { isLive, liveUrl } = useLiveStream() // Use the live stream hook
+  const [imageErrors, setImageErrors] = useState({}) // Track image loading errors
   const isLoading = usePageLoading(600) // Show skeleton for 600ms
   const sectionRef = useRef(null)
 
@@ -71,6 +73,10 @@ const SermonsList = () => {
     } else {
       window.open('https://www.youtube.com/playlist?list=PLhhjC515-IIjINZvrIvpwmYCBrUjY3Cvu', '_blank')
     }
+  }
+
+  const handleImageError = (sermonId) => {
+    setImageErrors(prev => ({ ...prev, [sermonId]: true }))
   }
 
   const handleSermonClick = (videoUrl) => {
@@ -140,13 +146,15 @@ const SermonsList = () => {
               onClick={() => handleSermonClick(sermon.videoUrl)}
             >
               <ThumbnailContainer>
-                <SermonThumbnail 
-                  src={sermon.thumbnail} 
-                  alt={sermon.title}
-                  onError={(e) => {
-                    e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 225'%3E%3Crect width='400' height='225' fill='%23f8f6f0'/%3E%3Cg opacity='0.3'%3E%3Ccircle cx='200' cy='112' r='40' fill='%23b5967a'/%3E%3Cpath d='M180 92 L220 112 L180 132 Z' fill='%23ffffff'/%3E%3C/g%3E%3Ctext x='200' y='180' text-anchor='middle' font-family='serif' font-size='16' fill='%235f5f56'%3ESermon%3C/text%3E%3C/svg%3E"
-                  }}
-                />
+                {imageErrors[sermon.id] ? (
+                  <SermonPlaceholder title={sermon.title} />
+                ) : (
+                  <SermonThumbnail 
+                    src={sermon.thumbnail} 
+                    alt={sermon.title}
+                    onError={() => handleImageError(sermon.id)}
+                  />
+                )}
                 <PlayOverlay>
                   <PlayButton>
                     <FaPlay size={24} />

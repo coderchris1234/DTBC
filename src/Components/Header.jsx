@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 import { theme } from '../styles/theme'
 import ThemeToggle from './ThemeToggle'
+import { FaBookmark } from 'react-icons/fa'
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -43,11 +44,17 @@ const Header = () => {
               <StyledNavLink to="/visit">Visit</StyledNavLink>
               <StyledNavLink to="/give">Give</StyledNavLink>
               <StyledNavLink to="/contact">Connect</StyledNavLink>
+              <BookmarkLink to="/bookmarks" title="Bookmarked Verses">
+                <FaBookmark />
+              </BookmarkLink>
               <ThemeToggle />
             </NavContainer>
           </DesktopNav>
 
           <MobileControls>
+            <BookmarkLink to="/bookmarks" title="Bookmarked Verses">
+              <FaBookmark />
+            </BookmarkLink>
             <ThemeToggle />
             <MobileMenuButton onClick={() => setIsMenuOpen(!isMenuOpen)}>
               <MenuLine isOpen={isMenuOpen} position="top" />
@@ -65,6 +72,10 @@ const Header = () => {
             <MobileNavLink to="/visit" onClick={() => setIsMenuOpen(false)}>Visit</MobileNavLink>
             <MobileNavLink to="/give" onClick={() => setIsMenuOpen(false)}>Give</MobileNavLink>
             <MobileNavLink to="/contact" onClick={() => setIsMenuOpen(false)}>Connect</MobileNavLink>
+            <MobileNavLink to="/bookmarks" onClick={() => setIsMenuOpen(false)}>
+              <FaBookmark style={{ marginRight: '0.5rem' }} />
+              Bookmarked Verses
+            </MobileNavLink>
           </MobileMenuContent>
         </MobileMenuContainer>
       </Container>
@@ -270,6 +281,34 @@ const StyledNavLink = styled(NavLink)`
       background: var(--color-primary-500);
       border-radius: ${theme.borderRadius.full};
     }
+  }
+`
+
+const BookmarkLink = styled(NavLink)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: ${theme.borderRadius.full};
+  background: rgba(255, 215, 0, 0.1);
+  color: #ffd700;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: rgba(255, 215, 0, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+  }
+  
+  &.active {
+    background: rgba(255, 215, 0, 0.3);
+    color: #ffed4e;
+  }
+  
+  svg {
+    font-size: 16px;
   }
 `
 

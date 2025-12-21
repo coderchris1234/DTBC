@@ -4,6 +4,9 @@ import WelcomeSection from '../Components/WelcomeSection'
 import VisionSection from '../Components/VisionSection'
 import Hope from '../Components/Hope'
 import WelcomeModal from '../Components/WelcomeModal'
+import DailyVerse from '../Components/DailyVerse'
+import VisitorCounter from '../Components/VisitorCounter'
+import FloatingPrayerButton from '../Components/FloatingPrayerButton'
 
 const LandingPage = () => {
   const [showWelcomeModal, setShowWelcomeModal] = useState(() => {
@@ -37,8 +40,11 @@ const LandingPage = () => {
       />
       <Hero/>
       <WelcomeSection />
+      <DailyVerse />
       <VisionSection />
       <Hope />
+      <VisitorCounter />
+      <FloatingPrayerButton />
     </>
   )
 }

@@ -7,6 +7,7 @@ import SermonsPage from "./Pages/SermonsPage";
 import GivePage from "./Pages/GivePage";
 import Visit from "./Pages/Visit";
 import ContactPage from "./Pages/ContactPage";
+import BookmarksPage from "./Pages/BookmarksPage";
 import NotFound from "./Pages/NotFound";
 import ErrorBoundary from "./Components/ErrorBoundary";
 import ScrollToTop from "./Components/ScrollToTop";
@@ -28,6 +29,7 @@ function App() {
           <Route path="give" element={<GivePage />} />
           <Route path="visit" element={<Visit />} />
           <Route path="contact" element={<ContactPage />} />
+          <Route path="bookmarks" element={<BookmarksPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         
