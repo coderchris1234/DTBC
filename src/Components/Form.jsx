@@ -222,7 +222,7 @@ _Sent from DTBC Website Contact Form_
           <FormHeader>
             <Title>Connect With Us</Title>
             <Subtitle>
-              We'd like to get to know you better and help you take Next Steps at Divine Touch Bible Church. 
+              We'd like to get to know you better and help you take Next Steps at Divine Touch Bible Church USA Inc. 
               Start by filling out this form and connecting with us.
             </Subtitle>
           </FormHeader>

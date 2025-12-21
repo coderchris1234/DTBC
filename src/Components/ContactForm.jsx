@@ -78,7 +78,7 @@ const ContactForm = () => {
 ${formData.message}
 
 ---
-Sent from Divine Touch Bible Church website
+Sent from Divine Touch Bible Church USA Inc website
     `.trim()
     
     // WhatsApp number (replace with actual church WhatsApp number)

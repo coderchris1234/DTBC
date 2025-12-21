@@ -31,7 +31,7 @@ const Place = () => {
     <>
       <HeaderSection>
         <HeaderText isVisible={isVisible} animationDelay="0.1s">
-          THERE'S A PLACE FOR YOU AT DIVINE TOUCH BIBLE CHURCH
+          THERE'S A PLACE FOR YOU AT DIVINE TOUCH BIBLE CHURCH USA INC
         </HeaderText>
       </HeaderSection>
       

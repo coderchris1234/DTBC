@@ -57,7 +57,7 @@ const Footer = () => {
                   </LogoFallback>
                 </LogoCircle>
                 <BrandContainer>
-                  <BrandTitle>Divine Touch Bible Church</BrandTitle>
+                  <BrandTitle>Divine Touch Bible Church USA Inc</BrandTitle>
                   <BrandTagline>A place where hearts find home</BrandTagline>
                 </BrandContainer>
               </LogoContainer>
@@ -105,7 +105,7 @@ const Footer = () => {
         
         <FooterBottom>
           <Copyright>
-            © {new Date().getFullYear()} Divine Touch Bible Church. All rights reserved.
+            © {new Date().getFullYear()} Divine Touch Bible Church USA Inc. All rights reserved.
           </Copyright>
         </FooterBottom>
       </Container>

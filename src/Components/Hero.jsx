@@ -25,9 +25,9 @@ const Hero = () => {
       <Container>
         <HeroContent isVisible={isVisible}>
           <WelcomeText>Welcome to</WelcomeText>
-          <HeroTitle>Divine Touch Bible Church</HeroTitle>
+          <HeroTitle>Divine Touch Bible Church USA Inc</HeroTitle>
           <HeroSubtitle>
-            A place where faith meets community, and hearts find their home in God's love.
+            A blessed Ministry located in NJ, USA to raised end-time believers to access the wonders of God through the practical teaching of the word of God and prayers.
           </HeroSubtitle>
           <ButtonContainer>
             <PrimaryButton onClick={handlePlanVisit}>
@@ -37,12 +37,12 @@ const Hero = () => {
               Learn More
             </SecondaryButton>
           </ButtonContainer>
+          <ScrollIndicator>
+            <ScrollText>Discover More</ScrollText>
+            <ScrollArrow>↓</ScrollArrow>
+          </ScrollIndicator>
         </HeroContent>
       </Container>
-      <ScrollIndicator>
-        <ScrollText>Discover More</ScrollText>
-        <ScrollArrow>↓</ScrollArrow>
-      </ScrollIndicator>
     </HeroSection>
   )
 }
@@ -65,8 +65,15 @@ const HeroSection = styled.section`
   transition: var(--transition-theme);
   
   @media (max-width: 768px) {
-    min-height: 500px;
+    min-height: 600px;
     padding-top: 70px;
+    height: auto;
+    min-height: calc(100vh - 70px);
+  }
+  
+  @media (max-width: 480px) {
+    min-height: calc(100vh - 70px);
+    padding: 70px 0 ${theme.spacing.xl};
   }
 `
 
@@ -87,29 +94,53 @@ const Container = styled.div`
   padding: 0 ${theme.spacing.lg};
   position: relative;
   z-index: 2;
+  width: 100%;
   
   @media (max-width: 768px) {
     padding: 0 ${theme.spacing.md};
+  }
+  
+  @media (max-width: 480px) {
+    padding: 0 ${theme.spacing.sm};
   }
 `
 
 const HeroContent = styled.div`
   text-align: center;
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
+  padding: ${theme.spacing.lg} 0;
   opacity: ${props => props.isVisible ? 1 : 0};
   transform: translateY(${props => props.isVisible ? '0' : '30px'});
   transition: all 1s ease-out;
+  position: relative;
+  z-index: 3;
+  
+  @media (max-width: 768px) {
+    max-width: 100%;
+    padding: ${theme.spacing.md} 0;
+  }
 `
 
 const WelcomeText = styled.p`
   font-family: ${theme.typography.fonts.secondary};
   font-size: ${theme.typography.sizes.lg};
   font-weight: ${theme.typography.weights.medium};
-  color: var(--text-secondary);
-  margin-bottom: ${theme.spacing.sm};
+  color: var(--text-secondary, #64748b);
+  margin-bottom: ${theme.spacing.md};
   letter-spacing: 2px;
   text-transform: uppercase;
+  
+  @media (max-width: 768px) {
+    font-size: ${theme.typography.sizes.base};
+    letter-spacing: 1px;
+    margin-bottom: ${theme.spacing.sm};
+  }
+  
+  @media (max-width: 480px) {
+    font-size: ${theme.typography.sizes.sm};
+    letter-spacing: 0.5px;
+  }
 `
 
 const HeroTitle = styled.h1`
@@ -119,13 +150,25 @@ const HeroTitle = styled.h1`
   color: var(--text-primary);
   margin-bottom: ${theme.spacing.lg};
   line-height: ${theme.typography.lineHeights.tight};
+  word-wrap: break-word;
+  hyphens: auto;
+  
+  @media (max-width: 1024px) {
+    font-size: ${theme.typography.sizes['5xl']};
+  }
   
   @media (max-width: 768px) {
     font-size: ${theme.typography.sizes['4xl']};
+    line-height: 1.2;
   }
   
   @media (max-width: 480px) {
     font-size: ${theme.typography.sizes['3xl']};
+    line-height: 1.1;
+  }
+  
+  @media (max-width: 360px) {
+    font-size: ${theme.typography.sizes['2xl']};
   }
 `
 
@@ -134,20 +177,27 @@ const HeroSubtitle = styled.p`
   font-size: ${theme.typography.sizes.xl};
   font-weight: ${theme.typography.weights.normal};
   color: var(--text-secondary);
-  margin-bottom: ${theme.spacing['3xl']};
   line-height: ${theme.typography.lineHeights.relaxed};
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: ${theme.spacing['3xl']};
+  max-width: 700px;
+  margin: 0 auto ${theme.spacing['3xl']};
+  word-wrap: break-word;
+  hyphens: auto;
+  
+  @media (max-width: 1024px) {
+    font-size: ${theme.typography.sizes.lg};
+    max-width: 600px;
+  }
   
   @media (max-width: 768px) {
-    font-size: ${theme.typography.sizes.lg};
+    font-size: ${theme.typography.sizes.base};
     margin-bottom: ${theme.spacing['2xl']};
+    max-width: 500px;
   }
   
   @media (max-width: 480px) {
-    font-size: ${theme.typography.sizes.base};
+    font-size: ${theme.typography.sizes.sm};
+    max-width: 100%;
+    margin-bottom: ${theme.spacing.xl};
   }
 `
 
@@ -221,17 +271,17 @@ const SecondaryButton = styled.button`
 `
 
 const ScrollIndicator = styled.div`
-  position: absolute;
-  bottom: ${theme.spacing.xl};
-  left: 50%;
-  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: ${theme.spacing.xs};
-  z-index: 2;
+  margin-top: ${theme.spacing.xl};
   
   @media (max-width: 768px) {
+    margin-top: ${theme.spacing.lg};
+  }
+  
+  @media (max-width: 480px) {
     display: none;
   }
 `

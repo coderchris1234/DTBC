@@ -39,7 +39,7 @@ const WelcomeSection = () => {
               A Place Where Every Heart Finds Home
             </MainHeading>
             <Description>
-              At Divine Touch Bible Church, we believe that faith flourishes in community. 
+              At Divine Touch Bible Church USA Inc, we believe that faith flourishes in community. 
               Whether you're taking your first steps in faith or have walked with God for years, 
               you'll find a warm welcome and genuine fellowship here.
             </Description>

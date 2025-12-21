@@ -39,7 +39,7 @@ const ChurchStory = () => {
               Founded on Faith, Built with Love
             </MainHeading>
             <StoryText>
-              Divine Touch Bible Church began as a vision to create a spiritual home where 
+              Divine Touch Bible Church USA Inc began as a vision to create a spiritual home where 
               people from all walks of life could experience God's transformative love. 
               What started as a small gathering of believers has grown into a thriving 
               community that spans across New Jersey and Texas.
