@@ -17,7 +17,7 @@ const Header = () => {
                 <LogoCircle>
                   <LogoImage 
                     src="/dtbc.jpeg" 
-                    alt="Divine Touch Bible Church"
+                    alt="Divine Touch Bible Church USA Inc"
                     onError={(e) => {
                       e.target.style.display = 'none'
                       e.target.nextSibling.style.display = 'flex'

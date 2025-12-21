@@ -103,9 +103,13 @@ const Breadcrumb = styled.nav`
   font-family: ${theme.typography.fonts.secondary};
   font-size: ${theme.typography.sizes.sm};
   color: var(--text-muted);
-  margin-bottom: ${theme.spacing.md};
+  margin-bottom: ${theme.spacing.lg};
   text-transform: uppercase;
   letter-spacing: 1px;
+  
+  @media (max-width: 768px) {
+    margin-bottom: ${theme.spacing.md};
+  }
 `
 
 const HeroTitle = styled.h1`
@@ -195,6 +199,7 @@ const SecondaryButton = styled.button`
   border-radius: ${theme.borderRadius.lg};
   cursor: pointer;
   transition: var(--transition-theme);
+  margin-bottom: ${theme.spacing.md};
   
   &:hover {
     background: var(--color-primary-50);
@@ -209,6 +214,7 @@ const SecondaryButton = styled.button`
   @media (max-width: 480px) {
     width: 100%;
     max-width: 280px;
+    margin-bottom: ${theme.spacing.lg};
   }
 `
 

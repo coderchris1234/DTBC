@@ -31,7 +31,7 @@ const Service = () => {
     <ServiceSection ref={sectionRef}>
       <Container>
         <MainTitle isVisible={isVisible}>
-          DIVINE TOUCH BIBLE CHURCH IS A PLACE FOR YOU TO BELONG!
+          DIVINE TOUCH BIBLE CHURCH USA INC IS A PLACE FOR YOU TO BELONG!
         </MainTitle>
         
         <ContentWrapper>

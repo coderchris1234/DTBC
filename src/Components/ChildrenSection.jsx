@@ -66,7 +66,7 @@ const ChildrenSection = () => {
                 Make A Difference
               </SectionTitle>
               <SectionText isVisible={isVisible} animationDelay="1.1s">
-                Our mission at Divine Touch Bible Church is to guide you in building a personal relationship with God. As you grow in this relationship, you'll continually find more freedom in Christ and embrace the purpose He has for your life. You can live out your purpose and make a difference in the world by serving others with your God-given gifts.
+                Our mission at Divine Touch Bible Church USA Inc is to guide you in building a personal relationship with God. As you grow in this relationship, you'll continually find more freedom in Christ and embrace the purpose He has for your life. You can live out your purpose and make a difference in the world by serving others with your God-given gifts.
               </SectionText>
             </DifferenceSection>
           </TextSection>
