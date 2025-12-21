@@ -82,7 +82,7 @@ Sent from Divine Touch Bible Church USA Inc website
     `.trim()
     
     // WhatsApp number (replace with actual church WhatsApp number)
-    const whatsappNumber = '+2349026161344' // Church phone number
+    const whatsappNumber = '+19732020411' // Church phone number
     
     // Create WhatsApp URL
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`
