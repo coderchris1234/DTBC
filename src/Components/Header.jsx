@@ -174,7 +174,7 @@ const BrandContainer = styled.div`
   display: flex;
   flex-direction: column;
   
-  @media (max-width: 640px) {
+  @media (max-width: 639px) {
     display: none;
   }
 `
@@ -185,6 +185,10 @@ const BrandTitle = styled.div`
   font-weight: ${theme.typography.weights.semibold};
   color: var(--text-primary);
   line-height: 1.2;
+  
+  @media (max-width: 768px) and (min-width: 640px) {
+    font-size: ${theme.typography.sizes.lg};
+  }
 `
 
 const BrandSubtitle = styled.div`
@@ -194,12 +198,20 @@ const BrandSubtitle = styled.div`
   font-weight: ${theme.typography.weights.medium};
   letter-spacing: 0.5px;
   text-transform: uppercase;
+  
+  @media (max-width: 768px) and (min-width: 640px) {
+    font-size: ${theme.typography.sizes.xs};
+  }
 `
 
 const DesktopNav = styled.nav`
   display: none;
 
-  @media (min-width: 768px) {
+  @media (min-width: 769px) {
+    display: block;
+  }
+  
+  @media (max-width: 768px) and (min-width: 640px) {
     display: block;
   }
 `
@@ -207,7 +219,11 @@ const DesktopNav = styled.nav`
 const NavContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: ${theme.spacing.xl};
+  gap: ${theme.spacing.lg};
+  
+  @media (max-width: 768px) and (min-width: 640px) {
+    gap: ${theme.spacing.md};
+  }
 `
 
 const MobileControls = styled.div`
@@ -215,7 +231,11 @@ const MobileControls = styled.div`
   align-items: center;
   gap: ${theme.spacing.sm};
   
-  @media (min-width: 768px) {
+  @media (min-width: 769px) {
+    display: none;
+  }
+  
+  @media (max-width: 768px) and (min-width: 640px) {
     display: none;
   }
 `
@@ -228,6 +248,10 @@ const StyledNavLink = styled(NavLink)`
   text-decoration: none;
   position: relative;
   transition: var(--transition-theme);
+  
+  @media (max-width: 768px) and (min-width: 640px) {
+    font-size: ${theme.typography.sizes.sm};
+  }
   
   &:hover {
     color: var(--text-primary);
@@ -258,7 +282,11 @@ const MobileMenuButton = styled.button`
   cursor: pointer;
   padding: ${theme.spacing.sm};
   
-  @media (min-width: 768px) {
+  @media (min-width: 769px) {
+    display: none;
+  }
+  
+  @media (max-width: 768px) and (min-width: 640px) {
     display: none;
   }
 `
@@ -289,7 +317,11 @@ const MobileMenuContainer = styled.div`
   max-height: ${props => props.isOpen ? '400px' : '0'};
   transition: max-height 0.3s ease;
 
-  @media (min-width: 768px) {
+  @media (min-width: 769px) {
+    display: none;
+  }
+  
+  @media (max-width: 768px) and (min-width: 640px) {
     display: none;
   }
 `
