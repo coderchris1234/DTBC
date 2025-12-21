@@ -27,7 +27,7 @@ const Hero = () => {
           <WelcomeText>Welcome to</WelcomeText>
           <HeroTitle>Divine Touch Bible Church USA Inc</HeroTitle>
           <HeroSubtitle>
-            A blessed Ministry located in NJ, USA to raised end-time believers to access the wonders of God through the practical teaching of the word of God and prayers.
+            A blessed Ministry located in NJ, USA to raise end-time believers to access the wonders of God through the practical teaching of the word of God and prayers.
           </HeroSubtitle>
           <ButtonContainer>
             <PrimaryButton onClick={handlePlanVisit}>
