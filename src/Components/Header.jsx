@@ -18,7 +18,7 @@ const Header = () => {
                 <LogoCircle>
                   <LogoImage 
                     src="/dtbc.jpeg" 
-                    alt="Divine Touch Bible Church USA Inc"
+                    alt="Divine Touch Bible Church Intl Inc"
                     onError={(e) => {
                       e.target.style.display = 'none'
                       e.target.nextSibling.style.display = 'flex'
@@ -30,7 +30,7 @@ const Header = () => {
                 </LogoCircle>
                 <BrandContainer>
                   <BrandTitle>Divine Touch</BrandTitle>
-                  <BrandSubtitle>Bible Church</BrandSubtitle>
+                  <BrandSubtitle>Bible Church Intl Inc</BrandSubtitle>
                 </BrandContainer>
               </LogoWrapper>
             </LogoLink>

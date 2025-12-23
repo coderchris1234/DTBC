@@ -8,7 +8,6 @@ import { useLiveStream } from '../hooks/useLiveStream'
 import { useYouTubePlaylist } from '../hooks/useYouTubePlaylist'
 import SermonPlaceholder from './SermonPlaceholder'
 import VideoPlayer from './VideoPlayer'
-import YouTubeStatus from './YouTubeStatus'
 
 const SermonsList = () => {
   const [isVisible, setIsVisible] = useState(true) // Start visible
@@ -210,9 +209,6 @@ const SermonsList = () => {
         videoUrl={selectedSermon?.videoUrl}
         title={selectedSermon?.title}
       />
-      
-      {/* YouTube Status (Development Only) */}
-      <YouTubeStatus />
     </Section>
   )
 }
