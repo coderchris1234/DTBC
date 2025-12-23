@@ -5,14 +5,26 @@ import { FaPlay, FaYoutube, FaCalendarAlt, FaClock } from 'react-icons/fa'
 import { SermonCardSkeleton, PageSkeleton } from './SkeletonLoader'
 import { usePageLoading } from '../hooks/usePageLoading'
 import { useLiveStream } from '../hooks/useLiveStream'
+import { useYouTubePlaylist } from '../hooks/useYouTubePlaylist'
 import SermonPlaceholder from './SermonPlaceholder'
+import VideoPlayer from './VideoPlayer'
+import YouTubeStatus from './YouTubeStatus'
 
 const SermonsList = () => {
   const [isVisible, setIsVisible] = useState(true) // Start visible
   const { isLive, liveUrl } = useLiveStream() // Use the live stream hook
   const [imageErrors, setImageErrors] = useState({}) // Track image loading errors
+  const [selectedSermon, setSelectedSermon] = useState(null) // For video player modal
+  const [isVideoPlayerOpen, setIsVideoPlayerOpen] = useState(false)
   const isLoading = usePageLoading(600) // Show skeleton for 600ms
   const sectionRef = useRef(null)
+
+  // YouTube API configuration
+  const PLAYLIST_ID = 'PLhhjC515-IIjINZvrIvpwmYCBrUjY3Cvu'
+  const YOUTUBE_API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY // Optional: Add to .env file
+  
+  // Fetch YouTube playlist data
+  const { videos: youtubeVideos, loading: youtubeLoading, error: youtubeError } = useYouTubePlaylist(PLAYLIST_ID, YOUTUBE_API_KEY)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -37,35 +49,8 @@ const SermonsList = () => {
     }
   }, [])
 
-  const sermons = [
-    {
-      id: 1,
-      title: "Prosperity of the Soul",
-      description: "Discover what true prosperity means in God's kingdom and how to cultivate spiritual wealth that lasts for eternity.",
-      date: "Recent",
-      duration: "45 min",
-      videoUrl: "https://www.youtube.com/watch?v=VUoLwrN7u20&list=PLhhjC515-IIjINZvrIvpwmYCBrUjY3Cvu&index=6",
-      thumbnail: "https://img.youtube.com/vi/VUoLwrN7u20/maxresdefault.jpg"
-    },
-    {
-      id: 2,
-      title: "I Will Hear Good News",
-      description: "Learn how to position yourself to receive God's good news and promises, even in challenging seasons of life.",
-      date: "Recent",
-      duration: "42 min",
-      videoUrl: "https://www.youtube.com/watch?v=LBvlI-MmhHQ&list=PLhhjC515-IIjINZvrIvpwmYCBrUjY3Cvu&index=4",
-      thumbnail: "https://img.youtube.com/vi/LBvlI-MmhHQ/maxresdefault.jpg"
-    },
-    {
-      id: 3,
-      title: "Divine Manifestation",
-      description: "Experience the power of God's divine manifestation in your life and witness His supernatural intervention in every situation.",
-      date: "Recent",
-      duration: "40 min",
-      videoUrl: "https://www.youtube.com/watch?v=SL2SK8Xbz5g&list=PLhhjC515-IIiqMpPQsCUO8UuOo9JV60Xr&index=1",
-      thumbnail: "https://img.youtube.com/vi/SL2SK8Xbz5g/maxresdefault.jpg"
-    }
-  ]
+  // Use YouTube videos or fallback to empty array
+  const sermons = youtubeVideos || []
 
   const handleViewMore = () => {
     if (isLive) {
@@ -79,12 +64,18 @@ const SermonsList = () => {
     setImageErrors(prev => ({ ...prev, [sermonId]: true }))
   }
 
-  const handleSermonClick = (videoUrl) => {
-    window.open(videoUrl, '_blank')
+  const handleSermonClick = (sermon) => {
+    setSelectedSermon(sermon)
+    setIsVideoPlayerOpen(true)
+  }
+
+  const closeVideoPlayer = () => {
+    setIsVideoPlayerOpen(false)
+    setSelectedSermon(null)
   }
 
   // Show skeleton loading
-  if (isLoading) {
+  if (isLoading || youtubeLoading) {
     return (
       <Section ref={sectionRef}>
         <Container>
@@ -132,8 +123,12 @@ const SermonsList = () => {
             Recent Sermons
           </MainHeading>
           <Description>
-            Catch up on our latest messages and be encouraged in your faith journey. 
-            Each sermon is filled with biblical truth and practical wisdom for daily living.
+            {youtubeError ? (
+              "Showing recent messages. Complete sermon library available on YouTube."
+            ) : (
+              `Catch up on our latest messages from our YouTube channel. 
+              ${sermons.length} sermons available with more added regularly.`
+            )}
           </Description>
         </HeaderContent>
         
@@ -143,7 +138,7 @@ const SermonsList = () => {
               key={sermon.id} 
               isVisible={isVisible} 
               delay={`${0.1 * (index + 1)}s`}
-              onClick={() => handleSermonClick(sermon.videoUrl)}
+              onClick={() => handleSermonClick(sermon)}
             >
               <ThumbnailContainer>
                 {imageErrors[sermon.id] ? (
@@ -159,6 +154,9 @@ const SermonsList = () => {
                   <PlayButton>
                     <FaPlay size={24} />
                   </PlayButton>
+                  <WatchOptions>
+                    <WatchOption>Choose Viewing Option</WatchOption>
+                  </WatchOptions>
                 </PlayOverlay>
               </ThumbnailContainer>
               
@@ -204,6 +202,17 @@ const SermonsList = () => {
           </ViewMoreText>
         </ViewMoreSection>
       </Container>
+      
+      {/* Video Player Modal */}
+      <VideoPlayer
+        isOpen={isVideoPlayerOpen}
+        onClose={closeVideoPlayer}
+        videoUrl={selectedSermon?.videoUrl}
+        title={selectedSermon?.title}
+      />
+      
+      {/* YouTube Status (Development Only) */}
+      <YouTubeStatus />
     </Section>
   )
 }
@@ -347,6 +356,30 @@ const PlayButton = styled.div`
   ${PlayOverlay}:hover & {
     transform: scale(1);
   }
+`
+
+const WatchOptions = styled.div`
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  
+  ${PlayOverlay}:hover & {
+    opacity: 1;
+  }
+`
+
+const WatchOption = styled.div`
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--color-primary-600);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  backdrop-filter: blur(10px);
 `
 
 const SermonContent = styled.div`

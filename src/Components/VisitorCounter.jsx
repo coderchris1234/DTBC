@@ -36,6 +36,7 @@ const VisitorCounter = () => {
     "God has a purpose for your visit today!",
     "You are part of God's beautiful plan!",
     "May your heart be filled with joy today!"
+    
   ];
 
   useEffect(() => {

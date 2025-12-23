@@ -2,12 +2,15 @@ import { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import { theme } from '../styles/theme'
 import { MdEmail, MdPhone, MdLocationOn, MdChat } from 'react-icons/md'
-import { FaFacebookF, FaYoutube } from 'react-icons/fa'
+import { FaFacebookF, FaYoutube, FaInstagram } from 'react-icons/fa'
 import { ContactCardSkeleton, PageSkeleton } from './SkeletonLoader'
 import { useComponentLoading } from '../hooks/usePageLoading'
 
 const ContactInfo = () => {
-  const [isVisible, setIsVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(() => {
+    // Initialize based on mobile view
+    return window.innerWidth <= 768;
+  });
   const isLoading = useComponentLoading([isVisible], 300)
   const sectionRef = useRef(null)
 
@@ -15,10 +18,7 @@ const ContactInfo = () => {
     // Check if it's mobile view
     const isMobile = window.innerWidth <= 768
     
-    if (isMobile) {
-      // On mobile, make visible immediately
-      setIsVisible(true)
-    } else {
+    if (!isMobile) {
       // On desktop, use intersection observer
       const observer = new IntersectionObserver(
         ([entry]) => {
@@ -173,6 +173,10 @@ const ContactInfo = () => {
               <SocialLink href="https://www.facebook.com/DivineTouchChurch" target="_blank" rel="noopener noreferrer">
                 <SocialIcon><FaFacebookF size={20} /></SocialIcon>
                 <SocialText>Facebook</SocialText>
+              </SocialLink>
+              <SocialLink href="https://www.instagram.com/divinetouchbiblechurch/?hl=en" target="_blank" rel="noopener noreferrer">
+                <SocialIcon><FaInstagram size={20} /></SocialIcon>
+                <SocialText>Instagram</SocialText>
               </SocialLink>
               <SocialLink href="https://www.youtube.com/@divinetouchbiblechurchnewj9570" target="_blank" rel="noopener noreferrer">
                 <SocialIcon><FaYoutube size={20} /></SocialIcon>

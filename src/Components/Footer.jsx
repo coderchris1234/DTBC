@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { theme } from '../styles/theme'
-import { FaFacebookF, FaYoutube } from 'react-icons/fa'
+import { FaFacebookF, FaYoutube, FaInstagram } from 'react-icons/fa'
 
 const Footer = () => {
   const [isVisible, setIsVisible] = useState(false)
@@ -91,6 +91,9 @@ const Footer = () => {
                 <SocialIcons>
                   <SocialIcon href="https://www.facebook.com/DivineTouchChurch" target='_blank' aria-label="Facebook">
                     <FaFacebookF size={20} />
+                  </SocialIcon>
+                  <SocialIcon href="https://www.instagram.com/divinetouchbiblechurch/?hl=en" target='_blank' aria-label="Instagram">
+                    <FaInstagram size={20} />
                   </SocialIcon>
                   <SocialIcon href="https://www.youtube.com/@divinetouchbiblechurchnewj9570" target='_blank' aria-label="YouTube">
                     <FaYoutube size={20} />

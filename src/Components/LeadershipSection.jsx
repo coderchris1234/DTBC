@@ -35,11 +35,11 @@ const LeadershipSection = () => {
         <HeaderContent isVisible={isVisible}>
           <SectionLabel>Leadership</SectionLabel>
           <MainHeading>
-            Shepherds of the Flock
+            Our Pastor
           </MainHeading>
           <Description>
-            Our pastoral team is committed to serving with humility, wisdom, and love, 
-            guiding our community in spiritual growth and faithful living.
+            Meet our dedicated pastor who leads our congregation with wisdom, compassion, 
+            and unwavering commitment to God's Word and our church family.
           </Description>
         </HeaderContent>
         
@@ -47,21 +47,26 @@ const LeadershipSection = () => {
           <LeaderCard isVisible={isVisible} delay="0.1s">
             <LeaderImageContainer>
               <LeaderImage 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='100' fill='%23f8f6f0'/%3E%3Ccircle cx='100' cy='80' r='30' fill='%23b5967a' opacity='0.3'/%3E%3Cpath d='M70 140 Q100 120 130 140 L130 200 L70 200 Z' fill='%23b5967a' opacity='0.3'/%3E%3C/svg%3E"
-                alt="Pastor"
+                src="/pastor.jpg"
+                alt="Apostle Dr. Jospeh Ihimekpen"
               />
             </LeaderImageContainer>
             <LeaderInfo>
               <LeaderName>Apostle Dr. Jospeh Ihimekpen</LeaderName>
               <LeaderTitle>Senior Pastor</LeaderTitle>
               <LeaderBio>
-                With over 20 years of ministry experience, Apostle Dr Joseph leads our congregation 
-                with passion for God's Word and deep care for each member of our church family.
+                With over 20 years of ministry experience, Apostle Dr. Joseph leads our congregation 
+                with passion for God's Word and deep care for each member of our church family. 
+                His heart for evangelism and discipleship has touched countless lives, and his 
+                commitment to biblical teaching creates an atmosphere where believers can grow 
+                in their faith. Known for his compassionate pastoral care and prophetic insight, 
+                he shepherds our community with wisdom, integrity, and an unwavering dedication 
+                to seeing lives transformed by the power of Christ.
               </LeaderBio>
             </LeaderInfo>
           </LeaderCard>
           
-          <LeaderCard isVisible={isVisible} delay="0.2s">
+          {/* <LeaderCard isVisible={isVisible} delay="0.2s">
             <LeaderImageContainer>
               <LeaderImage 
                 src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='100' fill='%23f8f6f0'/%3E%3Ccircle cx='100' cy='80' r='30' fill='%2396a896' opacity='0.3'/%3E%3Cpath d='M70 140 Q100 120 130 140 L130 200 L70 200 Z' fill='%2396a896' opacity='0.3'/%3E%3C/svg%3E"
@@ -93,7 +98,7 @@ const LeadershipSection = () => {
                 helping young people discover their identity and purpose in Christ.
               </LeaderBio>
             </LeaderInfo>
-          </LeaderCard>
+          </LeaderCard> */}
         </LeadershipGrid>
       </Container>
     </Section>
@@ -161,12 +166,11 @@ const Description = styled.p`
 `
 
 const LeadershipGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  display: flex;
+  justify-content: center;
   gap: ${theme.spacing['2xl']};
   
   @media (max-width: 768px) {
-    grid-template-columns: 1fr;
     gap: ${theme.spacing.xl};
   }
 `
