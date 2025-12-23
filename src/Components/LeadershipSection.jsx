@@ -55,7 +55,7 @@ const LeadershipSection = () => {
               <LeaderName>Apostle Dr. Jospeh Ihimekpen</LeaderName>
               <LeaderTitle>Senior Pastor</LeaderTitle>
               <LeaderBio>
-                With over 20 years of ministry experience, Apostle Dr. Joseph leads our congregation 
+                With over 20 years of ministry experience, Apostle Dr. Joseph leads Divine Touch Bible Church Intl Inc. 
                 with passion for God's Word and deep care for each member of our church family. 
                 His heart for evangelism and discipleship has touched countless lives, and his 
                 commitment to biblical teaching creates an atmosphere where believers can grow 
