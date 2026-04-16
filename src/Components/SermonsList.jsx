@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import { theme } from '../styles/theme'
-import { FaPlay, FaYoutube, FaCalendarAlt, FaClock } from 'react-icons/fa'
+import { FaPlay, FaYoutube, FaCalendarAlt } from 'react-icons/fa'
 import { SermonCardSkeleton, PageSkeleton } from './SkeletonLoader'
 import { usePageLoading } from '../hooks/usePageLoading'
 import { useLiveStream } from '../hooks/useLiveStream'
@@ -167,10 +167,6 @@ const SermonsList = () => {
                   <MetaItem>
                     <FaCalendarAlt size={14} />
                     <MetaText>{sermon.date}</MetaText>
-                  </MetaItem>
-                  <MetaItem>
-                    <FaClock size={14} />
-                    <MetaText>{sermon.duration}</MetaText>
                   </MetaItem>
                 </SermonMeta>
               </SermonContent>
