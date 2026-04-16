@@ -24,12 +24,12 @@ function App() {
         
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="about" element={<AboutPage />} />
-          <Route path="sermons" element={<SermonsPage />} />
-          <Route path="give" element={<GivePage />} />
-          <Route path="visit" element={<Visit />} />
-          <Route path="contact" element={<ContactPage />} />
-          <Route path="bookmarks" element={<BookmarksPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/sermons" element={<SermonsPage />} />
+          <Route path="/give" element={<GivePage />} />
+          <Route path="/visit" element={<Visit />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/bookmarks" element={<BookmarksPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         

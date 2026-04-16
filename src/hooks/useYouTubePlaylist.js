@@ -8,7 +8,6 @@ export const useYouTubePlaylist = (playlistId, apiKey) => {
   useEffect(() => {
     const fetchAllPlaylistVideos = async () => {
       if (!apiKey) {
-        // If no API key, use fallback static data
         setVideos(getFallbackSermons());
         setLoading(false);
         return;
@@ -17,102 +16,76 @@ export const useYouTubePlaylist = (playlistId, apiKey) => {
       try {
         setLoading(true);
         
-        // Get both playlist IDs from environment variables
-        const sundayPlaylistId = import.meta.env.VITE_YOUTUBE_SUNDAY_PLAYLIST || 'PLhhjC515-IIjINZvrIvpwmYCBrUjY3Cvu';
-        const wednesdayPlaylistId = import.meta.env.VITE_YOUTUBE_WEDNESDAY_PLAYLIST || 'PLhhjC515-IIiqMpPQsCUO8UuOo9JV60Xr';
+        const channelId = import.meta.env.VITE_YOUTUBE_CHANNEL_ID;
+        console.log(`🔍 Fetching all videos from channel: ${channelId}`);
         
-        console.log(`🔍 Fetching from multiple playlists:`);
-        console.log(`📅 Sunday Playlist: ${sundayPlaylistId}`);
-        console.log(`📅 Wednesday Playlist: ${wednesdayPlaylistId}`);
+        // Step 1: Get the actual uploads playlist ID from the channel
+        const channelUrl = `https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id=${channelId}&key=${apiKey}`;
+        const channelResponse = await fetch(channelUrl);
+        
+        if (!channelResponse.ok) {
+          throw new Error(`Failed to fetch channel details: ${channelResponse.status}`);
+        }
+        
+        const channelData = await channelResponse.json();
+        
+        if (!channelData.items || channelData.items.length === 0) {
+          throw new Error('Channel not found');
+        }
+        
+        const uploadsPlaylistId = channelData.items[0].contentDetails.relatedPlaylists.uploads;
+        console.log(`📋 Uploads playlist ID: ${uploadsPlaylistId}`);
         
         let allVideos = [];
+        let nextPageToken = '';
         
-        // Function to fetch videos from a single playlist
-        const fetchPlaylistVideos = async (playlistId, serviceName) => {
-          console.log(`🔍 Fetching ${serviceName} videos from playlist: ${playlistId}`);
+        // Step 2: Fetch ALL videos from the uploads playlist
+        do {
+          const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${uploadsPlaylistId}&key=${apiKey}${nextPageToken ? `&pageToken=${nextPageToken}` : ''}`;
           
-          let playlistVideos = [];
-          let nextPageToken = '';
-          
-          do {
-            const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${playlistId}&key=${apiKey}${nextPageToken ? `&pageToken=${nextPageToken}` : ''}`;
-            
-            const response = await fetch(url);
+          const response = await fetch(url);
 
-            if (!response.ok) {
-              console.error(`❌ Failed to fetch ${serviceName} playlist: ${response.status} ${response.statusText}`);
-              return [];
-            }
+          if (!response.ok) {
+            throw new Error(`Failed to fetch videos: ${response.status} ${response.statusText}`);
+          }
 
-            const data = await response.json();
-            console.log(`📊 ${serviceName} API Response:`, {
-              totalResults: data.pageInfo?.totalResults,
-              resultsPerPage: data.pageInfo?.resultsPerPage,
-              itemsInThisPage: data.items?.length,
-              nextPageToken: data.nextPageToken,
-              hasNextPage: !!data.nextPageToken
-            });
-            
-            // Filter out private/deleted videos and add service type
-            const validVideos = data.items
-              .filter(item => 
-                item.snippet.title !== 'Private video' && 
-                item.snippet.title !== 'Deleted video'
-              )
-              .map(item => ({
-                ...item,
-                serviceType: serviceName // Add service type for categorization
-              }));
-            
-            console.log(`✅ Valid ${serviceName} videos in this page: ${validVideos.length}`);
-            console.log(`📝 ${serviceName} video titles:`, validVideos.map(v => v.snippet.title));
-            
-            playlistVideos = [...playlistVideos, ...validVideos];
-            nextPageToken = data.nextPageToken;
-            
-          } while (nextPageToken);
+          const data = await response.json();
+          console.log(`📊 Page fetched: ${data.items?.length} videos, total: ${data.pageInfo?.totalResults}`);
           
-          return playlistVideos;
-        };
-        
-        // Fetch from both playlists
-        const [sundayVideos, wednesdayVideos] = await Promise.all([
-          fetchPlaylistVideos(sundayPlaylistId, 'Sunday'),
-          fetchPlaylistVideos(wednesdayPlaylistId, 'Wednesday')
-        ]);
-        
-        // Combine all videos
-        allVideos = [...sundayVideos, ...wednesdayVideos];
-        
-        // Sort by publish date (newest first)
-        allVideos.sort((a, b) => new Date(b.snippet.publishedAt) - new Date(a.snippet.publishedAt));
+          // Filter out private/deleted videos
+          const validVideos = data.items.filter(item =>
+            item.snippet.title !== 'Private video' &&
+            item.snippet.title !== 'Deleted video' &&
+            item.snippet.resourceId?.videoId
+          );
+          
+          allVideos = [...allVideos, ...validVideos];
+          nextPageToken = data.nextPageToken;
+          
+        } while (nextPageToken);
 
         const formattedVideos = allVideos.map((item, index) => ({
           id: index + 1,
           title: item.snippet.title,
-          description: item.snippet.description ? 
+          description: item.snippet.description ?
             (item.snippet.description.substring(0, 150) + (item.snippet.description.length > 150 ? '...' : '')) :
             'No description available.',
           date: formatDate(item.snippet.publishedAt),
-          duration: 'N/A', // Would need additional API call to get duration
+          duration: 'N/A',
           videoUrl: `https://www.youtube.com/watch?v=${item.snippet.resourceId.videoId}`,
-          thumbnail: item.snippet.thumbnails.maxresdefault?.url || 
-                    item.snippet.thumbnails.high?.url || 
+          thumbnail: item.snippet.thumbnails.maxresdefault?.url ||
+                    item.snippet.thumbnails.high?.url ||
                     item.snippet.thumbnails.medium?.url ||
                     item.snippet.thumbnails.default?.url,
-          videoId: item.snippet.resourceId.videoId,
-          serviceType: item.serviceType // Include service type in final data
+          videoId: item.snippet.resourceId.videoId
         }));
 
         setVideos(formattedVideos);
         setError(null);
-        console.log(`🎉 FINAL RESULT: Loaded ${formattedVideos.length} total sermons`);
-        console.log(`📊 Breakdown: ${sundayVideos.length} Sunday + ${wednesdayVideos.length} Wednesday`);
-        console.log(`📋 All sermon titles:`, formattedVideos.map(v => `[${v.serviceType}] ${v.title}`));
+        console.log(`🎉 Loaded ${formattedVideos.length} total videos from channel`);
       } catch (err) {
-        console.error('Error fetching YouTube playlists:', err);
+        console.error('Error fetching channel videos:', err);
         setError(err.message);
-        // Fallback to static data on error
         setVideos(getFallbackSermons());
       } finally {
         setLoading(false);
